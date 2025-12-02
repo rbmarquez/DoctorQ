@@ -1,0 +1,33 @@
+﻿# Dockerfile
+FROM python:3.12-slim
+
+ENV POETRY_VERSION=1.8.3
+
+# Instalar dependÃªncias do sistema necessÃ¡rias
+RUN apt-get update && apt-get install -y \
+  build-essential \
+  libpq-dev \
+  gcc \
+  antiword \
+  && rm -rf /var/lib/apt/lists/*
+
+# Instalar Poetry
+RUN pip install poetry==$POETRY_VERSION
+
+# Criar diretÃ³rio de trabalho e diretÃ³rios necessÃ¡rios
+WORKDIR /app
+RUN mkdir -p temp/uploads
+
+# Copiar arquivos de dependÃªncias e instalar
+COPY pyproject.toml poetry.lock ./
+RUN poetry install --no-interaction --no-ansi
+
+# Copiar o restante do cÃ³digo
+COPY . .
+
+# Expor porta da aplicaÃ§Ã£o
+EXPOSE 8080
+
+# Comando padrÃ£o (pode ser sobrescrito pelo docker-compose)
+CMD ["make", "dev"]
+

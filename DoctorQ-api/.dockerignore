@@ -1,0 +1,60 @@
+﻿# Arquivos de desenvolvimento
+.git
+.gitignore
+README.md
+readme.md
+Makefile
+.env*
+*.log
+*.tmp
+
+# Cache e temporÃ¡rios
+pycache/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.cache
+.mypy_cache
+.ruff_cache
+.venv
+venv
+
+database
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Arquivos de teste
+tests/
+test_*
+*_test.py
+
+# DocumentaÃ§Ã£o
+docs/
+*.md
+
+# Arquivos de build
+build/
+dist/
+*.egg-info/
+
+# Arquivos de backup
+*.bak
+*.backup

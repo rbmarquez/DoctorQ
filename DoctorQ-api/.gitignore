@@ -1,0 +1,50 @@
+# Environment
+.env
+.env.local
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv
+venv/
+env/
+
+# UV specific
+uv.lock
+.python-version
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Caches
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.cache/
+.EasyOCR/
+cache/
+
+# Temporary files
+temp/
+demo/
+.DS_Store
+
+# Docker
+docker-compose.override.yml
+
+# Claude
+.claude
