@@ -48,7 +48,11 @@ Todas as 30 rotas estão protegidas pelo RLS, mesmo as 22 não corrigidas no có
 ## 📊 ARQUIVOS MODIFICADOS
 
 ```
+<<<<<<< Updated upstream:DoctorQ-api/FINAL_COMMIT_SUMMARY.md
 DoctorQ/DoctorQ-api/
+=======
+DoctorQ/estetiQ-api/
+>>>>>>> Stashed changes:doctorq-api/FINAL_COMMIT_SUMMARY.md
 ├── database/
 │   ├── migration_020_fix_perfis_unique_constraint.sql  (NOVO)
 │   └── migration_021_row_level_security.sql            (NOVO)
@@ -171,7 +175,11 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 ## 📝 COMANDOS PARA COMMIT
 
 ```bash
+<<<<<<< Updated upstream:DoctorQ-api/FINAL_COMMIT_SUMMARY.md
 cd /mnt/repositorios/DoctorQ/DoctorQ-api
+=======
+cd /mnt/repositorios/DoctorQ/estetiQ-api
+>>>>>>> Stashed changes:doctorq-api/FINAL_COMMIT_SUMMARY.md
 
 # Ver mudanças
 git status

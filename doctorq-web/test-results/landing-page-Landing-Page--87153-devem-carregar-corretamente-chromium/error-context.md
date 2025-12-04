@@ -1,0 +1,632 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e5]:
+        - link "EstetiQ" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img [ref=e8]
+          - text: EstetiQ
+        - generic [ref=e10]:
+          - link "Para Você" [ref=e11] [cursor=pointer]:
+            - /url: "#para-voce"
+            - img [ref=e12]
+            - text: Para Você
+          - link "Para Clínicas" [ref=e15] [cursor=pointer]:
+            - /url: "#para-parceiros"
+            - img [ref=e16]
+            - text: Para Clínicas
+          - link "Universidade" [ref=e20] [cursor=pointer]:
+            - /url: "#universidade"
+            - img [ref=e21]
+            - text: Universidade
+          - link "Carreiras" [ref=e24] [cursor=pointer]:
+            - /url: "#carreiras"
+            - img [ref=e25]
+            - text: Carreiras
+        - generic [ref=e28]:
+          - link "Entrar" [ref=e29] [cursor=pointer]:
+            - /url: /login
+          - link "Começar Grátis" [ref=e30] [cursor=pointer]:
+            - /url: /registro
+        - button [ref=e31]:
+          - img [ref=e32]
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e38]:
+            - img [ref=e39]
+            - text: Mais de 10 mil profissionais
+          - generic [ref=e41]:
+            - heading "Sua beleza,nossa missão" [level=1] [ref=e42]
+            - paragraph [ref=e43]: Conecte-se com os melhores profissionais de estética. Encontre, agende e transforme-se.
+          - generic [ref=e44]:
+            - generic [ref=e45]:
+              - generic [ref=e46]: 1.000+
+              - generic [ref=e47]: Clínicas
+            - generic [ref=e48]:
+              - generic [ref=e49]: 50K+
+              - generic [ref=e50]: Pacientes
+            - generic [ref=e51]:
+              - generic [ref=e52]: 98%
+              - generic [ref=e53]: Satisfação
+        - generic [ref=e56]:
+          - generic [ref=e57]:
+            - heading "Encontre seu profissional" [level=2] [ref=e58]
+            - paragraph [ref=e59]: Busque por procedimentos ou localização
+          - generic [ref=e60]:
+            - generic [ref=e61]:
+              - img [ref=e62]
+              - 'textbox "Ex: Botox, Harmonização facial..." [ref=e65]'
+            - generic [ref=e66]:
+              - img [ref=e67]
+              - textbox "Cidade, bairro ou CEP" [ref=e70]
+            - button "Buscar Profissionais" [ref=e71]:
+              - img [ref=e72]
+              - text: Buscar Profissionais
+          - generic [ref=e75]:
+            - paragraph [ref=e76]: "Popular:"
+            - generic [ref=e77]:
+              - button "Limpeza de pele" [ref=e78]
+              - button "Botox" [ref=e79]
+              - button "Preenchimento labial" [ref=e80]
+              - button "Microagulhamento" [ref=e81]
+      - generic [ref=e82]:
+        - link "Criar Conta Grátis" [ref=e83] [cursor=pointer]:
+          - /url: /registro
+          - text: Criar Conta Grátis
+          - img [ref=e84]
+        - button "Ver como funciona" [ref=e86]:
+          - img [ref=e88]
+          - text: Ver como funciona
+    - generic [ref=e92]:
+      - generic [ref=e93]:
+        - heading "Escolha Sua Jornada" [level=2] [ref=e94]
+        - paragraph [ref=e95]: Uma plataforma completa para pacientes e profissionais da estética
+      - generic [ref=e96]:
+        - generic [ref=e99]:
+          - img [ref=e101]
+          - heading "Sou Cliente" [level=3] [ref=e103]
+          - paragraph [ref=e104]: Encontre os melhores profissionais de estética, agende procedimentos e transforme sua aparência com segurança e confiança.
+          - generic [ref=e105]:
+            - generic [ref=e106]:
+              - img [ref=e108]
+              - text: Agendamento inteligente com IA
+            - generic [ref=e110]:
+              - img [ref=e112]
+              - text: Chat 24/7 com assistente virtual
+            - generic [ref=e114]:
+              - img [ref=e116]
+              - text: Avaliações verificadas
+            - generic [ref=e118]:
+              - img [ref=e120]
+              - text: Acompanhamento pós-procedimento
+          - link "Criar Minha Conta" [ref=e122] [cursor=pointer]:
+            - /url: /registro?tipo=paciente
+            - text: Criar Minha Conta
+            - img [ref=e123]
+          - generic [ref=e125]:
+            - img [ref=e126]
+            - text: Cadastro grátis • Sem cartão de crédito
+        - generic [ref=e130]:
+          - img [ref=e132]
+          - heading "Sou Parceiro" [level=3] [ref=e136]
+          - paragraph [ref=e137]: Faça parte da maior rede de estética do Brasil. Gerencie sua clínica, receba leads qualificados e aumente seu faturamento.
+          - generic [ref=e138]:
+            - generic [ref=e139]:
+              - img [ref=e141]
+              - text: Leads qualificados com IA
+            - generic [ref=e144]:
+              - img [ref=e146]
+              - text: Gestão completa de clínica
+            - generic [ref=e151]:
+              - img [ref=e153]
+              - text: Marketplace B2B exclusivo
+            - generic [ref=e156]:
+              - img [ref=e158]
+              - text: Agenda inteligente integrada
+          - link "Quero Ser Parceiro" [ref=e160] [cursor=pointer]:
+            - /url: /parceiros
+            - text: Quero Ser Parceiro
+            - img [ref=e161]
+          - generic [ref=e163]:
+            - img [ref=e164]
+            - text: 30 dias grátis • Cancele quando quiser
+      - generic [ref=e166]:
+        - generic [ref=e167]:
+          - generic [ref=e168]: 1.000+
+          - generic [ref=e169]: Clínicas Parceiras
+        - generic [ref=e170]:
+          - generic [ref=e171]: 50K+
+          - generic [ref=e172]: Pacientes Ativos
+        - generic [ref=e173]:
+          - generic [ref=e174]: 98%
+          - generic [ref=e175]: Satisfação
+        - generic [ref=e176]:
+          - generic [ref=e177]: 500K+
+          - generic [ref=e178]: Procedimentos Agendados
+    - generic [ref=e181]:
+      - generic [ref=e182]:
+        - generic [ref=e183]:
+          - img [ref=e184]
+          - text: Educação Continuada
+        - heading "Universidade da Beleza" [level=2] [ref=e187]
+        - paragraph [ref=e188]: Aprenda com os maiores especialistas do mercado. Cursos, ebooks e podcast exclusivos para elevar sua carreira na estética.
+      - generic [ref=e189]:
+        - generic [ref=e190]:
+          - img [ref=e191]
+          - generic [ref=e196]: 15.000+
+          - generic [ref=e197]: Alunos
+        - generic [ref=e198]:
+          - img [ref=e199]
+          - generic [ref=e201]: 120+
+          - generic [ref=e202]: Cursos
+        - generic [ref=e203]:
+          - img [ref=e204]
+          - generic [ref=e207]: 98%
+          - generic [ref=e208]: Satisfação
+        - generic [ref=e209]:
+          - img [ref=e210]
+          - generic [ref=e213]: 50K+
+          - generic [ref=e214]: Certificados
+      - generic [ref=e215]:
+        - generic [ref=e216]:
+          - generic [ref=e217]:
+            - img [ref=e219]
+            - generic [ref=e221]:
+              - heading "Cursos Online" [level=3] [ref=e222]
+              - paragraph [ref=e223]: Certificação reconhecida pela SBME
+          - link "Ver Todos os Cursos" [ref=e224] [cursor=pointer]:
+            - /url: /universidade/cursos
+            - text: Ver Todos os Cursos
+            - img [ref=e225]
+        - generic [ref=e227]:
+          - generic [ref=e228]:
+            - generic [ref=e229]:
+              - img "Harmonização Facial Avançada" [ref=e231]
+              - generic [ref=e232]: Bestseller
+              - img [ref=e235]
+            - generic [ref=e237]:
+              - heading "Harmonização Facial Avançada" [level=4] [ref=e238]
+              - paragraph [ref=e239]: Dra. Mariana Costa
+              - generic [ref=e240]:
+                - generic [ref=e241]:
+                  - img [ref=e242]
+                  - text: 8 horas
+                - generic [ref=e245]:
+                  - img [ref=e246]
+                  - text: "2.345"
+                - generic [ref=e251]:
+                  - img [ref=e252]
+                  - text: "4.9"
+              - generic [ref=e254]:
+                - text: R$ 497
+                - link "Inscrever-se" [ref=e255] [cursor=pointer]:
+                  - /url: /universidade/cursos/1
+          - generic [ref=e256]:
+            - generic [ref=e257]:
+              - img "Técnicas de Preenchimento" [ref=e259]
+              - generic [ref=e260]: Bestseller
+              - img [ref=e263]
+            - generic [ref=e265]:
+              - heading "Técnicas de Preenchimento" [level=4] [ref=e266]
+              - paragraph [ref=e267]: Dr. Ricardo Almeida
+              - generic [ref=e268]:
+                - generic [ref=e269]:
+                  - img [ref=e270]
+                  - text: 6 horas
+                - generic [ref=e273]:
+                  - img [ref=e274]
+                  - text: "1.892"
+                - generic [ref=e279]:
+                  - img [ref=e280]
+                  - text: "4.8"
+              - generic [ref=e282]:
+                - text: R$ 397
+                - link "Inscrever-se" [ref=e283] [cursor=pointer]:
+                  - /url: /universidade/cursos/2
+          - generic [ref=e284]:
+            - generic [ref=e285]:
+              - img "Bioestimuladores de Colágeno" [ref=e287]
+              - generic [ref=e288]: Bestseller
+              - img [ref=e291]
+            - generic [ref=e293]:
+              - heading "Bioestimuladores de Colágeno" [level=4] [ref=e294]
+              - paragraph [ref=e295]: Dra. Ana Beatriz
+              - generic [ref=e296]:
+                - generic [ref=e297]:
+                  - img [ref=e298]
+                  - text: 5 horas
+                - generic [ref=e301]:
+                  - img [ref=e302]
+                  - text: "1.567"
+                - generic [ref=e307]:
+                  - img [ref=e308]
+                  - text: "4.9"
+              - generic [ref=e310]:
+                - text: R$ 347
+                - link "Inscrever-se" [ref=e311] [cursor=pointer]:
+                  - /url: /universidade/cursos/3
+      - generic [ref=e312]:
+        - generic [ref=e313]:
+          - generic [ref=e314]:
+            - img [ref=e316]
+            - generic [ref=e318]:
+              - heading "Ebooks Exclusivos" [level=3] [ref=e319]
+              - paragraph [ref=e320]: Conhecimento condensado por especialistas
+          - link "Ver Todos os Ebooks" [ref=e321] [cursor=pointer]:
+            - /url: /universidade/ebooks
+            - text: Ver Todos os Ebooks
+            - img [ref=e322]
+        - generic [ref=e324]:
+          - generic [ref=e325]:
+            - img [ref=e327]
+            - heading "Manual Completo de Estética Facial" [level=4] [ref=e329]
+            - generic [ref=e330]:
+              - generic [ref=e331]:
+                - img [ref=e332]
+                - text: 320 páginas
+              - generic [ref=e335]:
+                - img [ref=e336]
+                - text: 5.432 downloads
+            - generic [ref=e341]:
+              - text: R$ 97
+              - button "Comprar" [ref=e342]
+          - generic [ref=e343]:
+            - img [ref=e345]
+            - heading "Protocolos de Skincare Profissional" [level=4] [ref=e347]
+            - generic [ref=e348]:
+              - generic [ref=e349]:
+                - img [ref=e350]
+                - text: 180 páginas
+              - generic [ref=e353]:
+                - img [ref=e354]
+                - text: 3.891 downloads
+            - generic [ref=e359]:
+              - text: R$ 67
+              - button "Comprar" [ref=e360]
+          - generic [ref=e361]:
+            - img [ref=e363]
+            - heading "Marketing para Clínicas de Estética" [level=4] [ref=e365]
+            - generic [ref=e366]:
+              - generic [ref=e367]:
+                - img [ref=e368]
+                - text: 250 páginas
+              - generic [ref=e371]:
+                - img [ref=e372]
+                - text: 4.234 downloads
+            - generic [ref=e377]:
+              - text: R$ 87
+              - button "Comprar" [ref=e378]
+      - generic [ref=e379]:
+        - generic [ref=e380]:
+          - generic [ref=e381]:
+            - img [ref=e383]
+            - generic [ref=e385]:
+              - heading "Podcast EstetiQ" [level=3] [ref=e386]
+              - paragraph [ref=e387]: Conversas com os maiores nomes da estética
+          - link "Ver Todos os Episódios" [ref=e388] [cursor=pointer]:
+            - /url: /universidade/podcast
+            - text: Ver Todos os Episódios
+            - img [ref=e389]
+        - generic [ref=e391]:
+          - generic [ref=e392]:
+            - generic [ref=e393]:
+              - text: EP 127
+              - img [ref=e395]
+            - heading "O Futuro da Estética com IA" [level=4] [ref=e397]
+            - generic [ref=e398]:
+              - generic [ref=e399]:
+                - img [ref=e400]
+                - text: Dr. Felipe Santos
+              - generic [ref=e405]:
+                - img [ref=e406]
+                - text: 45 min
+          - generic [ref=e409]:
+            - generic [ref=e410]:
+              - text: EP 126
+              - img [ref=e412]
+            - 'heading "Bioestimuladores: Ciência e Prática" [level=4] [ref=e414]'
+            - generic [ref=e415]:
+              - generic [ref=e416]:
+                - img [ref=e417]
+                - text: Dra. Luciana Moraes
+              - generic [ref=e422]:
+                - img [ref=e423]
+                - text: 38 min
+          - generic [ref=e426]:
+            - generic [ref=e427]:
+              - text: EP 125
+              - img [ref=e429]
+            - heading "Como Conquistar Pacientes na Era Digital" [level=4] [ref=e431]
+            - generic [ref=e432]:
+              - generic [ref=e433]:
+                - img [ref=e434]
+                - text: Paula Mendes (Marketing)
+              - generic [ref=e439]:
+                - img [ref=e440]
+                - text: 52 min
+      - generic [ref=e443]:
+        - heading "Comece Sua Jornada de Aprendizado Hoje" [level=3] [ref=e444]
+        - paragraph [ref=e445]: Acesso ilimitado a todos os cursos, ebooks e episódios do podcast por apenas R$ 97/mês
+        - link "Assinar Agora" [ref=e446] [cursor=pointer]:
+          - /url: /universidade/assinar
+          - text: Assinar Agora
+          - img [ref=e447]
+    - generic [ref=e451]:
+      - generic [ref=e452]:
+        - generic [ref=e453]:
+          - img [ref=e454]
+          - text: Oportunidades de Carreira
+        - heading "Trabalhe no Mercado que Mais Cresce" [level=2] [ref=e457]
+        - paragraph [ref=e458]: Conectamos profissionais talentosos com as melhores clínicas de estética do Brasil. Encontre sua próxima oportunidade ou cadastre vagas da sua empresa.
+      - generic [ref=e459]:
+        - generic [ref=e460]:
+          - generic [ref=e461]: 850+
+          - generic [ref=e462]: Vagas Ativas
+        - generic [ref=e463]:
+          - generic [ref=e464]: 1.2K+
+          - generic [ref=e465]: Clínicas Parceiras
+        - generic [ref=e466]:
+          - generic [ref=e467]: 15K+
+          - generic [ref=e468]: Currículos Cadastrados
+        - generic [ref=e469]:
+          - generic [ref=e470]: 95%
+          - generic [ref=e471]: Taxa de Contratação
+      - generic [ref=e472]:
+        - generic [ref=e475]:
+          - img [ref=e477]
+          - heading "Buscar Vagas" [level=3] [ref=e480]
+          - paragraph [ref=e481]: Encontre oportunidades nas melhores clínicas de estética. Filtros inteligentes por localização, salário e tipo de vaga.
+          - list [ref=e482]:
+            - listitem [ref=e483]:
+              - img [ref=e484]
+              - text: Vagas exclusivas e atualizadas diariamente
+            - listitem [ref=e487]:
+              - img [ref=e488]
+              - text: Candidatura rápida com currículo integrado
+            - listitem [ref=e491]:
+              - img [ref=e492]
+              - text: Notificações de vagas compatíveis
+            - listitem [ref=e495]:
+              - img [ref=e496]
+              - text: Processo seletivo transparente
+          - link "Explorar Vagas" [ref=e499] [cursor=pointer]:
+            - /url: /carreiras/vagas
+            - text: Explorar Vagas
+            - img [ref=e500]
+        - generic [ref=e504]:
+          - img [ref=e506]
+          - heading "Cadastrar Vagas" [level=3] [ref=e509]
+          - paragraph [ref=e510]: Encontre os melhores talentos para sua clínica. Gestão completa de vagas e candidatos em uma plataforma integrada.
+          - list [ref=e511]:
+            - listitem [ref=e512]:
+              - img [ref=e513]
+              - text: Alcance 15.000+ profissionais qualificados
+            - listitem [ref=e516]:
+              - img [ref=e517]
+              - text: Triagem automática com IA
+            - listitem [ref=e520]:
+              - img [ref=e521]
+              - text: Dashboard de gestão de candidatos
+            - listitem [ref=e524]:
+              - img [ref=e525]
+              - text: Integração com seu sistema de RH
+          - link "Anunciar Vaga" [ref=e528] [cursor=pointer]:
+            - /url: /clinica/vagas/nova
+            - text: Anunciar Vaga
+            - img [ref=e529]
+      - generic [ref=e531]:
+        - generic [ref=e532]:
+          - heading "Vagas em Destaque" [level=3] [ref=e533]
+          - link "Ver Todas as Vagas" [ref=e534] [cursor=pointer]:
+            - /url: /carreiras/vagas
+            - text: Ver Todas as Vagas
+            - img [ref=e535]
+        - generic [ref=e537]:
+          - generic [ref=e538]:
+            - generic [ref=e539]:
+              - img [ref=e541]
+              - generic [ref=e545]:
+                - heading "Esteticista Facial" [level=4] [ref=e546]
+                - paragraph [ref=e547]: Clínica Essence
+              - img [ref=e548]
+            - generic [ref=e550]:
+              - generic [ref=e551]:
+                - img [ref=e552]
+                - text: São Paulo, SP
+              - generic [ref=e555]:
+                - img [ref=e556]
+                - text: CLT - Tempo Integral
+              - generic [ref=e559]:
+                - img [ref=e560]
+                - text: R$ 3.500 - R$ 5.000
+            - generic [ref=e562]: PresencialBenefíciosVR/VT
+            - link "Candidatar-se" [ref=e563] [cursor=pointer]:
+              - /url: /carreiras/vagas/1
+          - generic [ref=e564]:
+            - generic [ref=e565]:
+              - img [ref=e567]
+              - generic [ref=e571]:
+                - heading "Recepcionista" [level=4] [ref=e572]
+                - paragraph [ref=e573]: Beauty Clinic
+              - img [ref=e574]
+            - generic [ref=e576]:
+              - generic [ref=e577]:
+                - img [ref=e578]
+                - text: Rio de Janeiro, RJ
+              - generic [ref=e581]:
+                - img [ref=e582]
+                - text: CLT - Tempo Integral
+              - generic [ref=e585]:
+                - img [ref=e586]
+                - text: R$ 2.000 - R$ 2.800
+            - generic [ref=e588]: PresencialSem Experiência
+            - link "Candidatar-se" [ref=e589] [cursor=pointer]:
+              - /url: /carreiras/vagas/2
+          - generic [ref=e590]:
+            - generic [ref=e591]:
+              - img [ref=e593]
+              - generic [ref=e597]:
+                - heading "Dermatologista" [level=4] [ref=e598]
+                - paragraph [ref=e599]: Espaço Dermato
+              - img [ref=e600]
+            - generic [ref=e602]:
+              - generic [ref=e603]:
+                - img [ref=e604]
+                - text: Brasília, DF
+              - generic [ref=e607]:
+                - img [ref=e608]
+                - text: PJ - Flexível
+              - generic [ref=e611]:
+                - img [ref=e612]
+                - text: R$ 8.000 - R$ 15.000
+            - generic [ref=e614]: HíbridoCRM Ativo
+            - link "Candidatar-se" [ref=e615] [cursor=pointer]:
+              - /url: /carreiras/vagas/3
+          - generic [ref=e616]:
+            - generic [ref=e617]:
+              - img [ref=e619]
+              - generic [ref=e623]:
+                - heading "Gerente de Clínica" [level=4] [ref=e624]
+                - paragraph [ref=e625]: Rede Beleza+
+              - img [ref=e626]
+            - generic [ref=e628]:
+              - generic [ref=e629]:
+                - img [ref=e630]
+                - text: Belo Horizonte, MG
+              - generic [ref=e633]:
+                - img [ref=e634]
+                - text: CLT - Tempo Integral
+              - generic [ref=e637]:
+                - img [ref=e638]
+                - text: R$ 5.000 - R$ 8.000
+            - generic [ref=e640]: PresencialLiderança
+            - link "Candidatar-se" [ref=e641] [cursor=pointer]:
+              - /url: /carreiras/vagas/4
+      - generic [ref=e642]:
+        - generic [ref=e643]:
+          - heading "Por Que Trabalhar em Estética?" [level=3] [ref=e644]
+          - paragraph [ref=e645]: O mercado de estética é um dos que mais cresce no Brasil. Faça parte dessa transformação.
+        - generic [ref=e646]:
+          - generic [ref=e647]:
+            - img [ref=e649]
+            - heading "Ambiente Inspirador" [level=4] [ref=e651]
+            - paragraph [ref=e652]: Trabalhe em clínicas modernas e acolhedoras
+          - generic [ref=e653]:
+            - img [ref=e655]
+            - heading "Crescimento Profissional" [level=4] [ref=e658]
+            - paragraph [ref=e659]: Planos de carreira estruturados
+          - generic [ref=e660]:
+            - img [ref=e662]
+            - heading "Time Qualificado" [level=4] [ref=e667]
+            - paragraph [ref=e668]: Aprenda com os melhores profissionais
+          - generic [ref=e669]:
+            - img [ref=e671]
+            - heading "Tecnologia de Ponta" [level=4] [ref=e673]
+            - paragraph [ref=e674]: Equipamentos modernos e inovadores
+        - link "Saiba Mais Sobre Carreiras" [ref=e676] [cursor=pointer]:
+          - /url: /carreiras/sobre
+          - text: Saiba Mais Sobre Carreiras
+          - img [ref=e677]
+    - contentinfo [ref=e679]:
+      - generic [ref=e680]:
+        - generic [ref=e681]:
+          - generic [ref=e682]:
+            - link "AIqueBeleza!" [ref=e683] [cursor=pointer]:
+              - /url: /
+              - img [ref=e684]
+              - text: AIqueBeleza!
+            - paragraph [ref=e686]: Conectando você aos melhores profissionais de estética do Brasil.
+            - generic [ref=e687]:
+              - link "Instagram" [ref=e688] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e689]
+              - link "Facebook" [ref=e692] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e693]
+              - link "LinkedIn" [ref=e695] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e696]
+              - link "Twitter" [ref=e700] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e701]
+          - generic [ref=e703]:
+            - heading "Para Clientes" [level=3] [ref=e704]
+            - list [ref=e705]:
+              - listitem [ref=e706]:
+                - link "Buscar Profissionais" [ref=e707] [cursor=pointer]:
+                  - /url: /busca?tipo=profissional
+              - listitem [ref=e708]:
+                - link "Buscar Clínicas" [ref=e709] [cursor=pointer]:
+                  - /url: /busca?tipo=clinica
+              - listitem [ref=e710]:
+                - link "Procedimentos" [ref=e711] [cursor=pointer]:
+                  - /url: /procedimentos
+              - listitem [ref=e712]:
+                - link "Como Funciona" [ref=e713] [cursor=pointer]:
+                  - /url: /#como-funciona
+              - listitem [ref=e714]:
+                - link "Avaliações" [ref=e715] [cursor=pointer]:
+                  - /url: /marketplace/avaliacoes
+          - generic [ref=e716]:
+            - heading "Para Profissionais" [level=3] [ref=e717]
+            - list [ref=e718]:
+              - listitem [ref=e719]:
+                - link "Cadastrar Clínica" [ref=e720] [cursor=pointer]:
+                  - /url: /parceiros
+              - listitem [ref=e721]:
+                - link "Cadastrar Profissional" [ref=e722] [cursor=pointer]:
+                  - /url: /parceiros
+              - listitem [ref=e723]:
+                - link "Planos e Preços" [ref=e724] [cursor=pointer]:
+                  - /url: /parceiros
+              - listitem [ref=e725]:
+                - link "Central de Ajuda" [ref=e726] [cursor=pointer]:
+                  - /url: /ajuda
+              - listitem [ref=e727]:
+                - link "Blog" [ref=e728] [cursor=pointer]:
+                  - /url: /blog
+          - generic [ref=e729]:
+            - heading "Contato" [level=3] [ref=e730]
+            - list [ref=e731]:
+              - listitem [ref=e732]:
+                - img [ref=e733]
+                - generic [ref=e736]:
+                  - generic [ref=e737]: Email
+                  - link "contato@aiquebeleza.com" [ref=e738] [cursor=pointer]:
+                    - /url: mailto:contato@aiquebeleza.com
+              - listitem [ref=e739]:
+                - img [ref=e740]
+                - generic [ref=e742]:
+                  - generic [ref=e743]: Telefone
+                  - link "(61) 9996-3256" [ref=e744] [cursor=pointer]:
+                    - /url: tel:+551140028922
+              - listitem [ref=e745]:
+                - img [ref=e746]
+                - generic [ref=e749]:
+                  - generic [ref=e750]: Endereço
+                  - paragraph [ref=e751]: Brasília, DF, Brasil
+        - generic [ref=e753]:
+          - generic [ref=e754]: © 2025 AIqueBeleza!. Todos os direitos reservados.
+          - generic [ref=e755]:
+            - link "Termos de Uso" [ref=e756] [cursor=pointer]:
+              - /url: /legal/termos-servico
+            - link "Política de Privacidade" [ref=e757] [cursor=pointer]:
+              - /url: /legal/privacidade
+            - link "Cookies" [ref=e758] [cursor=pointer]:
+              - /url: /legal/cookies
+            - link "Ajuda" [ref=e759] [cursor=pointer]:
+              - /url: /ajuda
+  - region "Notifications alt+T"
+  - generic:
+    - generic:
+      - button "Gisele AI":
+        - generic:
+          - img "Gisele AI"
+      - generic:
+        - generic:
+          - img
+```

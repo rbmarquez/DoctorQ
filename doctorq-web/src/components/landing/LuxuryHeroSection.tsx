@@ -5,9 +5,6 @@ import { Search, MapPin, Stethoscope, X, Activity, LogIn, UserPlus } from "lucid
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-// Vídeo local otimizado para web (H.264 MP4 - 17MB comprimido)
-const VIDEO_URL = "/videos/doctorq-web.mp4";
-
 export function LuxuryHeroSection() {
   const router = useRouter();
   const { data: session } = useSession();

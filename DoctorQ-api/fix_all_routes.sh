@@ -7,7 +7,11 @@
 echo "🔧 Aplicando correções de multi-tenancy em massa..."
 echo "=================================================="
 
+<<<<<<< Updated upstream:DoctorQ-api/fix_all_routes.sh
 cd /mnt/repositorios/DoctorQ/doctorq-api
+=======
+cd /mnt/repositorios/DoctorQ/estetiQ-api
+>>>>>>> Stashed changes:doctorq-api/fix_all_routes.sh
 
 # Lista de arquivos a corrigir (já excluindo clinicas_route.py que foi corrigido manualmente)
 files=(

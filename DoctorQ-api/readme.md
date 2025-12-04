@@ -40,7 +40,11 @@ O DoctorQ é uma plataforma completa para o segmento de estética que oferece:
 
 ```bash
 # Clone o repositório
+<<<<<<< Updated upstream:DoctorQ-api/readme.md
 cd /mnt/repositorios/DoctorQ/doctorq-api
+=======
+cd /mnt/repositorios/DoctorQ/estetiQ-api
+>>>>>>> Stashed changes:doctorq-api/readme.md
 
 # Instalar dependências
 make install

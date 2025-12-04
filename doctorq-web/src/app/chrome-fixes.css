@@ -1,0 +1,250 @@
+/* Chrome-specific CSS Fixes for EstetiQ Admin */
+
+/* Detect Chrome browser and apply fixes */
+@supports (-webkit-appearance:none) and (stroke-color:transparent) {
+  /* Fix card backgrounds */
+  .bg-card,
+  [data-slot="card"] {
+    background-color: #ffffff !important;
+    color: #111827 !important;
+  }
+
+  /* Fix card content backgrounds */
+  [data-slot="card-content"],
+  .card-content {
+    background-color: #ffffff !important;
+    color: #111827 !important;
+  }
+
+  /* Fix button backgrounds */
+  [data-slot="button"],
+  .bg-background {
+    background-color: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+  }
+
+  [data-slot="button"]:hover {
+    background-color: #f9fafb !important;
+    border-color: #d1d5db !important;
+  }
+
+  /* Fix text colors */
+  .text-card-foreground {
+    color: #111827 !important;
+  }
+
+  .text-gray-900 {
+    color: #111827 !important;
+  }
+
+  .text-gray-600 {
+    color: #4b5563 !important;
+  }
+
+  .text-gray-500 {
+    color: #6b7280 !important;
+  }
+
+  /* Fix badge backgrounds */
+  [data-slot="badge"] {
+    opacity: 1 !important;
+  }
+
+  .bg-red-100 {
+    background-color: #fee2e2 !important;
+  }
+
+  .text-red-800 {
+    color: #991b1b !important;
+  }
+
+  .bg-green-100 {
+    background-color: #dcfce7 !important;
+  }
+
+  .text-green-800 {
+    color: #166534 !important;
+  }
+
+  .bg-blue-100 {
+    background-color: #dbeafe !important;
+  }
+
+  .text-blue-800 {
+    color: #1e40af !important;
+  }
+
+  .bg-purple-100 {
+    background-color: #f3e8ff !important;
+  }
+
+  .text-purple-800 {
+    color: #6b21a8 !important;
+  }
+
+  /* Fix avatar backgrounds */
+  [data-slot="avatar"] {
+    background-color: transparent !important;
+  }
+
+  [data-slot="avatar-fallback"] {
+    opacity: 1 !important;
+  }
+
+  /* Fix hover states */
+  .hover\:bg-accent:hover {
+    background-color: #f3f4f6 !important;
+  }
+
+  .hover\:text-accent-foreground:hover {
+    color: #111827 !important;
+  }
+
+  /* Fix tabs component */
+  [data-slot="tabs-list"],
+  [role="tablist"],
+  .bg-muted {
+    background-color: #f3f4f6 !important;
+  }
+
+  .text-muted-foreground {
+    color: #6b7280 !important;
+  }
+
+  [data-slot="tabs-list"] > *,
+  [role="tablist"] > * {
+    background-color: transparent !important;
+  }
+
+  [data-slot="tabs-list"] button,
+  [role="tablist"] button,
+  [role="tab"] {
+    background-color: transparent !important;
+    color: #6b7280 !important;
+  }
+
+  [data-slot="tabs-list"] button[data-state="active"],
+  [role="tablist"] button[data-state="active"],
+  [data-slot="tabs-list"] button[aria-selected="true"],
+  [role="tablist"] button[aria-selected="true"],
+  [role="tab"][aria-selected="true"] {
+    background-color: #ffffff !important;
+    color: #111827 !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Ensure tab panels are visible */
+  [role="tabpanel"] {
+    background-color: #ffffff !important;
+    color: #111827 !important;
+  }
+
+  /* Fix shadow rendering */
+  .shadow-custom-sm,
+  .shadow-custom-md,
+  .shadow-custom-lg {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* Ensure proper contrast */
+  .bg-white {
+    background-color: #ffffff !important;
+  }
+
+  .bg-gray-50 {
+    background-color: #f9fafb !important;
+  }
+
+  .bg-gray-100 {
+    background-color: #f3f4f6 !important;
+  }
+
+  /* Fix gradient backgrounds */
+  .bg-gradient-to-r,
+  .bg-gradient-to-br {
+    background-image: none !important;
+    background-color: #ef4444 !important;
+  }
+
+  .from-red-400.to-orange-500 {
+    background: linear-gradient(135deg, #f87171 0%, #f97316 100%) !important;
+  }
+
+  .from-red-500.to-orange-600 {
+    background: linear-gradient(135deg, #ef4444 0%, #ea580c 100%) !important;
+  }
+}
+
+/* Additional Chrome-only fixes using webkit prefix detection */
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm) {
+  /* Ensure all data-slot elements have proper backgrounds */
+  [data-slot] {
+    isolation: isolate;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* Fix potential rendering issues with flexbox in Chrome */
+  .flex {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+  }
+
+  .flex-col {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+  }
+
+  /* Ensure proper rendering of rounded corners */
+  .rounded-full {
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+  }
+
+  /* Fix text rendering */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Ensure transitions work properly */
+  .transition-all-smooth {
+    -webkit-transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Fallback for extreme cases where Chrome still has issues */
+@media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+  /* Nuclear option: force white backgrounds on problematic elements */
+  div[class*="bg-card"],
+  div[class*="card-content"],
+  button[data-slot="button"],
+  div[data-slot="card"],
+  div[data-slot="card-content"] {
+    background-color: #ffffff !important;
+    color: #111827 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Fix for Cards in admin/usuarios specifically */
+  .p-6.space-y-4 > div,
+  .bg-white.rounded-lg {
+    background-color: #ffffff !important;
+  }
+
+  /* Ensure all text is visible */
+  h1, h2, h3, h4, h5, h6, p, span, div {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Fix for any element with transparent background */
+  *[style*="background-color: transparent"],
+  *[style*="background: transparent"],
+  *[style*="background-color: rgba(0, 0, 0, 0)"] {
+    background-color: #ffffff !important;
+  }
+}

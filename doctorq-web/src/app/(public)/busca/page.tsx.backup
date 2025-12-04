@@ -1,0 +1,466 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { Search, MapPin, Filter, Star, Clock, Award, Heart, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import Image from "next/image";
+
+interface SearchResult {
+  id: string;
+  tipo: "procedimento" | "profissional" | "clinica";
+  nome: string;
+  descricao: string;
+  avaliacao?: number;
+  totalAvaliacoes?: number;
+  especialidade?: string;
+  localizacao?: string;
+  preco?: number;
+  duracao?: number;
+  imagem?: string;
+  disponivel?: boolean;
+}
+
+export default function BuscaPage() {
+  const searchParams = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
+  const [searchType, setSearchType] = useState<"procedimento" | "profissional">(
+    (searchParams.get("tipo") as "procedimento" | "profissional") || "procedimento"
+  );
+  const [location, setLocation] = useState(searchParams.get("local") || "");
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({
+    minPrice: 0,
+    maxPrice: 1000,
+    rating: 0,
+    disponivel: false,
+  });
+
+  useEffect(() => {
+    performSearch();
+  }, [searchParams]);
+
+  const performSearch = async () => {
+    setLoading(true);
+
+    try {
+      // Simular busca no backend - aqui você integrará com a API real
+      await new Promise(resolve => setTimeout(resolve, 800));
+
+      // Mock de resultados baseado no tipo de busca
+      const mockResults: SearchResult[] = searchType === "procedimento"
+        ? [
+            {
+              id: "1",
+              tipo: "procedimento",
+              nome: "Limpeza de Pele Profunda",
+              descricao: "Remoção completa de impurezas e cravos com extração manual",
+              avaliacao: 4.8,
+              totalAvaliacoes: 156,
+              preco: 150,
+              duracao: 60,
+              localizacao: "São Paulo, SP",
+              disponivel: true,
+            },
+            {
+              id: "2",
+              tipo: "procedimento",
+              nome: "Limpeza de Pele com Peeling",
+              descricao: "Limpeza profunda combinada com peeling químico suave",
+              avaliacao: 4.9,
+              totalAvaliacoes: 203,
+              preco: 220,
+              duracao: 90,
+              localizacao: "São Paulo, SP",
+              disponivel: true,
+            },
+            {
+              id: "3",
+              tipo: "procedimento",
+              nome: "Limpeza de Pele + Hidratação",
+              descricao: "Limpeza completa seguida de hidratação intensiva",
+              avaliacao: 4.7,
+              totalAvaliacoes: 89,
+              preco: 180,
+              duracao: 75,
+              localizacao: "Rio de Janeiro, RJ",
+              disponivel: true,
+            },
+          ]
+        : [
+            {
+              id: "1",
+              tipo: "profissional",
+              nome: "Dra. Ana Silva",
+              descricao: "Dermatologista especializada em tratamentos faciais",
+              avaliacao: 4.9,
+              totalAvaliacoes: 342,
+              especialidade: "Dermatologia Estética",
+              localizacao: "São Paulo, SP",
+              disponivel: true,
+            },
+            {
+              id: "2",
+              tipo: "profissional",
+              nome: "Dra. Mariana Costa",
+              descricao: "Esteticista com 15 anos de experiência",
+              avaliacao: 4.8,
+              totalAvaliacoes: 278,
+              especialidade: "Estética Facial",
+              localizacao: "São Paulo, SP",
+              disponivel: true,
+            },
+            {
+              id: "3",
+              tipo: "profissional",
+              nome: "Dr. Pedro Santos",
+              descricao: "Cirurgião plástico e harmonização facial",
+              avaliacao: 5.0,
+              totalAvaliacoes: 421,
+              especialidade: "Cirurgia Plástica",
+              localizacao: "Rio de Janeiro, RJ",
+              disponivel: true,
+            },
+          ];
+
+      setResults(mockResults);
+    } catch (error) {
+      console.error("Erro ao buscar:", error);
+      setResults([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (searchQuery) params.set("q", searchQuery);
+    if (location) params.set("local", location);
+    params.set("tipo", searchType);
+
+    window.history.pushState({}, "", `/busca?${params.toString()}`);
+    performSearch();
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-purple-50">
+      {/* Header de Busca */}
+      <div className="bg-white border-b border-pink-100 sticky top-0 z-40 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center space-x-4">
+            {/* Logo */}
+            <Link href="/" className="flex items-center space-x-2 group flex-shrink-0">
+              <div className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+                Que Beleza
+              </div>
+            </Link>
+
+            {/* Barra de Busca Inline */}
+            <div className="flex-1 flex space-x-2">
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <Input
+                  type="text"
+                  placeholder={searchType === "procedimento" ? "Buscar procedimento..." : "Buscar profissional..."}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                  className="pl-10 h-11 border-gray-200"
+                />
+              </div>
+              <div className="w-48 relative">
+                <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <Input
+                  type="text"
+                  placeholder="Localização"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                  className="pl-10 h-11 border-gray-200"
+                />
+              </div>
+              <Button
+                onClick={handleSearch}
+                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white h-11 px-6"
+              >
+                <Search className="h-4 w-4 mr-2" />
+                Buscar
+              </Button>
+            </div>
+          </div>
+
+          {/* Tabs de Tipo */}
+          <div className="flex space-x-2 mt-4">
+            <button
+              onClick={() => {
+                setSearchType("procedimento");
+                handleSearch();
+              }}
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                searchType === "procedimento"
+                  ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+            >
+              Procedimentos
+            </button>
+            <button
+              onClick={() => {
+                setSearchType("profissional");
+                handleSearch();
+              }}
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                searchType === "profissional"
+                  ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+            >
+              Profissionais
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Conteúdo Principal */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex gap-8">
+          {/* Sidebar de Filtros */}
+          <aside className="hidden lg:block w-64 flex-shrink-0">
+            <div className="bg-white rounded-xl shadow-sm border border-pink-100 p-6 sticky top-24">
+              <div className="flex items-center space-x-2 mb-6">
+                <Filter className="h-5 w-5 text-pink-600" />
+                <h3 className="font-bold text-gray-900">Filtros</h3>
+              </div>
+
+              {/* Avaliação */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-3">
+                  Avaliação Mínima
+                </label>
+                <div className="space-y-2">
+                  {[5, 4, 3].map((rating) => (
+                    <button
+                      key={rating}
+                      onClick={() => setFilters({ ...filters, rating })}
+                      className={`w-full flex items-center space-x-2 px-3 py-2 rounded-lg transition-all ${
+                        filters.rating === rating
+                          ? "bg-pink-50 border-2 border-pink-500"
+                          : "bg-gray-50 border-2 border-transparent hover:bg-gray-100"
+                      }`}
+                    >
+                      <div className="flex">
+                        {Array.from({ length: rating }).map((_, i) => (
+                          <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                        ))}
+                      </div>
+                      <span className="text-sm text-gray-700">ou mais</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Faixa de Preço */}
+              {searchType === "procedimento" && (
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Faixa de Preço
+                  </label>
+                  <div className="space-y-3">
+                    <Input
+                      type="number"
+                      placeholder="Mínimo"
+                      value={filters.minPrice}
+                      onChange={(e) => setFilters({ ...filters, minPrice: Number(e.target.value) })}
+                      className="w-full"
+                    />
+                    <Input
+                      type="number"
+                      placeholder="Máximo"
+                      value={filters.maxPrice}
+                      onChange={(e) => setFilters({ ...filters, maxPrice: Number(e.target.value) })}
+                      className="w-full"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Disponibilidade */}
+              <div className="mb-6">
+                <label className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={filters.disponivel}
+                    onChange={(e) => setFilters({ ...filters, disponivel: e.target.checked })}
+                    className="w-4 h-4 text-pink-600 border-gray-300 rounded focus:ring-pink-500"
+                  />
+                  <span className="text-sm text-gray-700">Apenas disponíveis</span>
+                </label>
+              </div>
+
+              <Button
+                onClick={performSearch}
+                className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"
+              >
+                Aplicar Filtros
+              </Button>
+            </div>
+          </aside>
+
+          {/* Resultados */}
+          <main className="flex-1">
+            {/* Header dos Resultados */}
+            <div className="mb-6">
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                {loading ? "Buscando..." : `${results.length} resultados encontrados`}
+              </h1>
+              {searchQuery && (
+                <p className="text-gray-600">
+                  Mostrando resultados para <span className="font-semibold text-pink-600">"{searchQuery}"</span>
+                  {location && ` em ${location}`}
+                </p>
+              )}
+            </div>
+
+            {/* Loading State */}
+            {loading && (
+              <div className="flex flex-col items-center justify-center py-20">
+                <Loader2 className="h-12 w-12 text-pink-500 animate-spin mb-4" />
+                <p className="text-gray-600">Buscando os melhores resultados para você...</p>
+              </div>
+            )}
+
+            {/* Resultados Grid */}
+            {!loading && results.length > 0 && (
+              <div className="space-y-4">
+                {results.map((result) => (
+                  <Link
+                    key={result.id}
+                    href={`/${result.tipo}s/${result.id}`}
+                    className="block"
+                  >
+                    <div className="bg-white rounded-xl shadow-sm border border-pink-100 hover:shadow-lg hover:border-pink-300 transition-all p-6 group">
+                      <div className="flex gap-6">
+                        {/* Imagem */}
+                        <div className="w-32 h-32 flex-shrink-0 bg-gradient-to-br from-pink-100 to-purple-100 rounded-xl flex items-center justify-center overflow-hidden">
+                          {result.tipo === "procedimento" ? (
+                            <Award className="h-12 w-12 text-pink-500" />
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-pink-200 to-purple-200 flex items-center justify-center">
+                              <span className="text-3xl font-bold text-white">
+                                {result.nome.charAt(0)}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Conteúdo */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between mb-2">
+                            <div>
+                              <h3 className="text-xl font-bold text-gray-900 group-hover:text-pink-600 transition-colors mb-1">
+                                {result.nome}
+                              </h3>
+                              {result.especialidade && (
+                                <p className="text-sm text-pink-600 font-medium">
+                                  {result.especialidade}
+                                </p>
+                              )}
+                            </div>
+                            {result.preco && (
+                              <div className="text-right">
+                                <div className="text-2xl font-bold text-pink-600">
+                                  R$ {result.preco}
+                                </div>
+                                <div className="text-xs text-gray-500">por sessão</div>
+                              </div>
+                            )}
+                          </div>
+
+                          <p className="text-gray-600 mb-4 line-clamp-2">
+                            {result.descricao}
+                          </p>
+
+                          <div className="flex flex-wrap items-center gap-4">
+                            {/* Avaliação */}
+                            {result.avaliacao && (
+                              <div className="flex items-center space-x-1">
+                                <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                                <span className="font-semibold text-gray-900">{result.avaliacao}</span>
+                                <span className="text-gray-500 text-sm">({result.totalAvaliacoes})</span>
+                              </div>
+                            )}
+
+                            {/* Duração */}
+                            {result.duracao && (
+                              <div className="flex items-center space-x-1 text-gray-600">
+                                <Clock className="h-4 w-4" />
+                                <span className="text-sm">{result.duracao} min</span>
+                              </div>
+                            )}
+
+                            {/* Localização */}
+                            {result.localizacao && (
+                              <div className="flex items-center space-x-1 text-gray-600">
+                                <MapPin className="h-4 w-4" />
+                                <span className="text-sm">{result.localizacao}</span>
+                              </div>
+                            )}
+
+                            {/* Disponível */}
+                            {result.disponivel && (
+                              <div className="inline-flex items-center px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-full">
+                                Disponível
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Botão de Ação */}
+                        <div className="flex-shrink-0 flex items-center">
+                          <Button
+                            className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"
+                          >
+                            Ver Detalhes
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            {/* Empty State */}
+            {!loading && results.length === 0 && (
+              <div className="text-center py-20">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-pink-100 rounded-full mb-6">
+                  <Search className="h-10 w-10 text-pink-500" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  Nenhum resultado encontrado
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  Tente ajustar sua busca ou filtros para encontrar o que procura
+                </p>
+                <Button
+                  onClick={() => {
+                    setSearchQuery("");
+                    setLocation("");
+                    setFilters({ minPrice: 0, maxPrice: 1000, rating: 0, disponivel: false });
+                  }}
+                  variant="outline"
+                  className="border-pink-500 text-pink-600 hover:bg-pink-50"
+                >
+                  Limpar Filtros
+                </Button>
+              </div>
+            )}
+          </main>
+        </div>
+      </div>
+    </div>
+  );
+}

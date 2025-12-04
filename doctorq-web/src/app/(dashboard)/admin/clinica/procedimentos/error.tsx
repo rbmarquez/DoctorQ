@@ -1,0 +1,1 @@
+'use client';import{ErrorState}from'@/components/shared/feedback/ErrorState';export default function E({error,reset}:{error:Error;reset:()=>void}){return<div className="p-8"><ErrorState title="Erro"error={error}onRetry={reset}/></div>;}

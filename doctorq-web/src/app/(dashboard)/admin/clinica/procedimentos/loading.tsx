@@ -1,0 +1,1 @@
+import{Skeleton}from'@/components/ui/skeleton';export default function L(){return<div className="p-8"><Skeleton className="h-64 w-full"/></div>;}

@@ -21,7 +21,11 @@ ssh usuario@servidor-producao
 sudo -u postgres createdb doctorq
 
 # Aplicar schema completo
+<<<<<<< Updated upstream:DoctorQ-api/DEPLOY_PRODUCAO.md
 cd /caminho/para/doctorq-api
+=======
+cd /caminho/para/estetiQ-api
+>>>>>>> Stashed changes:doctorq-api/DEPLOY_PRODUCAO.md
 sudo -u postgres psql -d dbdoctorq -f database/schema_completo_doctorq.sql
 ```
 
@@ -90,7 +94,11 @@ sudo supervisorctl status doctorq-api
 pkill -f "uvicorn.*doctorq"
 
 # Iniciar em background
+<<<<<<< Updated upstream:DoctorQ-api/DEPLOY_PRODUCAO.md
 cd /caminho/para/doctorq-api
+=======
+cd /caminho/para/estetiQ-api
+>>>>>>> Stashed changes:doctorq-api/DEPLOY_PRODUCAO.md
 nohup uv run uvicorn src.main:app --host 0.0.0.0 --port 8080 > /var/log/doctorq-api.log 2>&1 &
 ```
 

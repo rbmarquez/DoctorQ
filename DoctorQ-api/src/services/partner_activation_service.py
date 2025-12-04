@@ -426,6 +426,7 @@ class PartnerActivationService:
         result = await self.db.execute(stmt)
         existing_empresa = result.scalar_one_or_none()
 
+<<<<<<< Updated upstream:DoctorQ-api/src/services/partner_activation_service.py
         empresa = existing_empresa
         if not empresa and cnpj:
             stmt = select(Empresa).where(Empresa.nr_cnpj == cnpj)
@@ -512,6 +513,94 @@ class PartnerActivationService:
 
         await self.db.flush()
         return empresa, user, temp_password
+=======
+        empresa = existing_empresa
+        if not empresa and cnpj:
+            stmt = select(Empresa).where(Empresa.nr_cnpj == cnpj)
+            result = await self.db.execute(stmt)
+            empresa = result.scalar_one_or_none()
+
+        if empresa:
+            # Atualizar dados básicos se estiverem diferentes
+            if business_name and empresa.nm_empresa != business_name:
+                empresa.nm_empresa = business_name
+            if business_name and empresa.nm_razao_social != business_name:
+                empresa.nm_razao_social = business_name
+            if empresa.nm_plano != "partner":
+                empresa.nm_plano = "partner"
+            if empresa.st_ativo != "S":
+                empresa.st_ativo = "S"
+            await self.db.flush()
+        else:
+            # Criar empresa
+            empresa = Empresa(
+                id_empresa=uuid.uuid4(),
+                nm_empresa=business_name,
+                nm_razao_social=business_name,
+                nm_plano="partner",  # Plano de parceiro
+                st_ativo="S",  # S = Ativo, N = Inativo
+                nr_cnpj=cnpj if cnpj else None,
+                dt_criacao=datetime.utcnow(),
+            )
+
+            self.db.add(empresa)
+            await self.db.flush()
+
+        # Verificar existência de usuário antes de aplicar o contexto de tenant.
+        # Sem o contexto configurado conseguimos inspecionar duplicidades mesmo que pertençam a outra empresa.
+        stmt = select(User).where(User.nm_email == contact_email)
+        result = await self.db.execute(stmt)
+        existing_user = result.scalar_one_or_none()
+
+        if existing_user and existing_user.id_empresa and existing_user.id_empresa != empresa.id_empresa:
+            raise ValueError(
+                "Endereço de e-mail já está associado a outra empresa DoctorQ. Utilize um e-mail diferente."
+            )
+
+        # Gerar senha temporária (SEMPRE, mesmo para usuários existentes)
+        temp_password = self._generate_temp_password()
+
+        if existing_user:
+            # Atualizar dados essenciais antes de configurar o contexto de tenant.
+            existing_user.id_empresa = empresa.id_empresa
+            existing_user.nm_completo = contact_name
+            existing_user.nr_telefone = contact_phone
+            existing_user.nm_password_hash = hash_password(temp_password)
+            user = existing_user
+            await self.db.flush()
+        else:
+            # Usuário será criado após clonagem do perfil (precisamos do id_perfil).
+            user = None
+
+        # Configurar contexto de tenant para permitir operações nas tabelas com RLS
+        await self._set_empresa_context(empresa.id_empresa)
+
+        # Buscar perfil template para o tipo de parceiro e CLONAR para a empresa
+        desired_profile_name = self.PROFILE_MAP.get(partner_type, "Gestor de Clínica")
+        perfil_gestor = await self._clone_perfil_template(desired_profile_name, empresa.id_empresa)
+
+        if user is not None:
+            # Garantir que o usuário utilize o perfil correto após clonagem
+            user.id_perfil = perfil_gestor.id_perfil
+        else:
+            # Criar usuário com perfil de gestor_clinica e associar à empresa
+            user = User(
+                id_user=uuid.uuid4(),
+                id_empresa=empresa.id_empresa,  # Associar à empresa
+                id_perfil=perfil_gestor.id_perfil,  # Perfil de parceiro adequado
+                nm_email=contact_email,
+                nm_completo=contact_name,
+                nm_password_hash=hash_password(temp_password),  # Hash seguro com pbkdf2_sha256
+                nm_papel="usuario",  # Papel básico (o perfil específico está em id_perfil)
+                nr_telefone=contact_phone,  # Adicionar telefone
+                st_ativo="S",  # S = Ativo
+                dt_criacao=datetime.utcnow(),
+            )
+            self.db.add(user)
+
+        await self.db.flush()
+        return empresa, user, temp_password
+>>>>>>> Stashed changes:doctorq-api/src/services/partner_activation_service.py
 
     async def _create_package_with_licenses(
         self,

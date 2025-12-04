@@ -302,12 +302,21 @@ import { ProtectedAction } from '@/components/clinica/ProtectedAction';
 
 ## 📦 Arquivos Entregues
 
+<<<<<<< Updated upstream:DoctorQ-api/IMPLEMENTACAO_COMPLETA_PERMISSOES.md
 1. ✅ `/mnt/repositorios/DoctorQ/doctorq-api/src/middleware/apikey_auth.py` (modificado)
 2. ✅ `/mnt/repositorios/DoctorQ/doctorq-api/src/utils/auth.py` (modificado)
 3. ✅ `/mnt/repositorios/DoctorQ/doctorq-api/src/routes/agendamentos_route.py` (modificado)
 4. ✅ `/mnt/repositorios/DoctorQ/doctorq-api/GUIA_APLICACAO_DECORATOR_PERMISSOES.md` (criado)
 5. ✅ `/mnt/repositorios/DoctorQ/doctorq-api/RELATORIO_TESTES_SISTEMA_PERMISSOES.md` (criado)
 6. ✅ `/mnt/repositorios/DoctorQ/doctorq-api/IMPLEMENTACAO_COMPLETA_PERMISSOES.md` (este arquivo)
+=======
+1. ✅ `/mnt/repositorios/DoctorQ/estetiQ-api/src/middleware/apikey_auth.py` (modificado)
+2. ✅ `/mnt/repositorios/DoctorQ/estetiQ-api/src/utils/auth.py` (modificado)
+3. ✅ `/mnt/repositorios/DoctorQ/estetiQ-api/src/routes/agendamentos_route.py` (modificado)
+4. ✅ `/mnt/repositorios/DoctorQ/estetiQ-api/GUIA_APLICACAO_DECORATOR_PERMISSOES.md` (criado)
+5. ✅ `/mnt/repositorios/DoctorQ/estetiQ-api/RELATORIO_TESTES_SISTEMA_PERMISSOES.md` (criado)
+6. ✅ `/mnt/repositorios/DoctorQ/estetiQ-api/IMPLEMENTACAO_COMPLETA_PERMISSOES.md` (este arquivo)
+>>>>>>> Stashed changes:doctorq-api/IMPLEMENTACAO_COMPLETA_PERMISSOES.md
 
 **Total de linhas modificadas/criadas**: ~2.500 linhas (backend + frontend + docs)
 

@@ -139,7 +139,11 @@ Arquivos de suporte para o serviço de IA
 
 ## Observações
 
+<<<<<<< Updated upstream:DoctorQ-api/ROTAS_MIGRADAS_PARA_AI_SERVICE.md
 - As credenciais Azure OpenAI estão configuradas no doctorq-service-ai
+=======
+- As credenciais Azure OpenAI estão configuradas no estetiQ-service-ai
+>>>>>>> Stashed changes:doctorq-api/ROTAS_MIGRADAS_PARA_AI_SERVICE.md
 - O banco de dados PostgreSQL (10.11.2.81:5432/dbdoctorq) é compartilhado entre os serviços
 - A autenticação via API Key é mantida em ambos os serviços
 - O Redis (cache) é opcional e compartilhado

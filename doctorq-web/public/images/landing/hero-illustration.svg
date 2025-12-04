@@ -1,0 +1,36 @@
+<svg width="600" height="600" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="600" height="600" fill="url(#grad1)"/>
+
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgb(251,207,232);stop-opacity:0.4" />
+      <stop offset="50%" style="stop-color:rgb(233,213,255);stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:rgb(224,231,255);stop-opacity:0.4" />
+    </linearGradient>
+  </defs>
+
+  <!-- Decorative circles -->
+  <circle cx="150" cy="150" r="80" fill="rgba(251,113,133,0.2)"/>
+  <circle cx="450" cy="450" r="100" fill="rgba(167,139,250,0.2)"/>
+  <circle cx="500" cy="150" r="60" fill="rgba(244,114,182,0.2)"/>
+
+  <!-- Beauty icon representation -->
+  <g transform="translate(200, 200)">
+    <!-- Face outline -->
+    <ellipse cx="100" cy="100" rx="80" ry="100" fill="rgba(255,255,255,0.8)" stroke="rgba(244,114,182,0.5)" stroke-width="3"/>
+
+    <!-- Eyes -->
+    <ellipse cx="75" cy="85" rx="8" ry="12" fill="rgba(244,114,182,0.8)"/>
+    <ellipse cx="125" cy="85" rx="8" ry="12" fill="rgba(244,114,182,0.8)"/>
+
+    <!-- Smile -->
+    <path d="M 70 120 Q 100 140 130 120" stroke="rgba(244,114,182,0.8)" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Sparkles -->
+    <path d="M 40 60 L 45 65 L 40 70 L 35 65 Z" fill="rgba(251,113,133,0.6)"/>
+    <path d="M 160 60 L 165 65 L 160 70 L 155 65 Z" fill="rgba(167,139,250,0.6)"/>
+    <path d="M 100 30 L 105 35 L 100 40 L 95 35 Z" fill="rgba(244,114,182,0.6)"/>
+  </g>
+</svg>

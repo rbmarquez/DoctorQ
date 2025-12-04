@@ -125,9 +125,9 @@ export function GiseleChatWidget() {
   // Sugestões rápidas
   const quickSuggestions = [
     { icon: "📅", text: "Como agendar consulta?", gradient: "from-blue-400 to-cyan-400" },
-    { icon: "💉", text: "Procedimentos disponíveis", gradient: "from-purple-400 to-pink-400" },
+    { icon: "💉", text: "Procedimentos disponíveis", gradient: "from-purple-400 to-blue-400" },
     { icon: "✨", text: "Harmonização facial", gradient: "from-orange-400 to-rose-400" },
-    { icon: "👤", text: "Falar com atendente", gradient: "from-red-400 to-pink-500", isHandoff: true },
+    { icon: "👤", text: "Falar com atendente", gradient: "from-red-400 to-blue-500", isHandoff: true },
   ];
 
   return (
