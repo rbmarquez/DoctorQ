@@ -2,7 +2,7 @@
 import uuid
 from typing import Any, AsyncGenerator, Dict, List, Optional
 
-from langchain.agents import AgentExecutor
+from langchain_classic.agents import AgentExecutor
 from langchain_openai import AzureChatOpenAI
 
 from src.config.logger_config import get_logger

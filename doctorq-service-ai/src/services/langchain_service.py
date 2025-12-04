@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from typing import Any, AsyncGenerator, Dict, List, Optional, Tuple, Union
 
 from fastapi import Depends
-from langchain.agents import AgentExecutor, create_openai_functions_agent
+from langchain_classic.agents import AgentExecutor, create_openai_functions_agent
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_openai import AzureChatOpenAI
