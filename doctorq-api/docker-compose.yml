@@ -1,0 +1,101 @@
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - LLM_PROVIDER=${LLM_PROVIDER}
+      - DATA_ENCRYPTION_KEY={DATA_ENCRYPTION_KEY}
+      # - LANGFUSE_ENABLED=true
+      # - LANGFUSE_SECRET_KEY=sk-lf-e15e2b70-e3ea-4b57-8be4-32ad0b3bfecb
+      # - LANGFUSE_PUBLIC_KEY=pk-lf-29234559-58bb-4d63-b29b-37ae2482bfac
+      # - LANGFUSE_HOST=http://langfuse:3010
+    # depends_on:
+    # - postgres
+    # - redis
+    volumes:
+      - .:/app
+    # command:
+    #   - bash
+    #   - -c
+    #   - |
+    #   # - "poetry install && poetry run uvicorn src.main:app --host 0.0.0.0 --port 8080 --reload"
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: postgres
+    environment:
+      - POSTGRES_DB=inovaia
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432" # Usa 5433 no host para evitar conflito
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # - ../database/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis-commander
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8008:8081"
+    depends_on:
+      - redis
+
+  langfuse:
+    image: ghcr.io/langfuse/langfuse:2
+    container_name: langfuse
+    ports:
+      - "3010:3010"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/langfuse
+      - REDIS_URL=redis://redis:6379
+      - S3_ENDPOINT=http://minio:9004
+      - S3_ACCESS_KEY=minioadmin
+      - S3_SECRET_KEY=minioadmin
+      - PORT=3010
+      - NEXTAUTH_SECRET=your-nextauth-secret
+      - NEXTAUTH_URL=http://localhost:3010
+      - SALT=salt
+      - ENCRYPTION_KEY=4beb2460265b1c5c600a140ce9f9291befab3efe8c4d546e5cdb356c42d4a05a
+    depends_on:
+      - postgres
+      - redis
+      - minio
+
+  minio:
+    image: minio/minio
+    container_name: minio
+    command: server /data --console-address ":9090"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    ports:
+      - "9000:9000" # API S3
+      - "9090:9090" # Console (UI web)
+    volumes:
+      - minio_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:

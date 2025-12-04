@@ -1,0 +1,68 @@
+﻿# Dockerfile Otimizado com UV para builds rÃ¡pidos
+FROM python:3.12-slim
+
+# VariÃ¡veis essenciais para aplicaÃ§Ã£o ML
+ENV TZ=America/Sao_Paulo \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    # ML/Docling otimizaÃ§Ãµes
+    TOKENIZERS_PARALLELISM=false \
+    CUDA_VISIBLE_DEVICES="" \
+    OMP_NUM_THREADS=2 \
+    MKL_NUM_THREADS=2 \
+    # UV otimizaÃ§Ãµes
+    UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy
+
+# Instala UV e dependÃªncias do sistema em uma Ãºnica camada
+RUN apt-get update -q && \
+    apt-get install -y -q --no-install-recommends \
+        build-essential \
+        libpq-dev \
+        libpq5 \
+        tzdata \
+        antiword \
+        poppler-utils \
+        tesseract-ocr \
+        tesseract-ocr-por \
+        curl && \
+    curl -LsSf https://astral.sh/uv/install.sh | sh && \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
+    echo $TZ > /etc/timezone && \
+    rm -rf /var/lib/apt/lists/* && \
+    groupadd -r appuser && \
+    useradd -r -g appuser appuser && \
+    mkdir -p /app/logs && \
+    mkdir -p /app/temp/uploads && \
+    mkdir -p /app/.cache/huggingface && \
+    mkdir -p /app/.cache/transformers && \
+    chown -R appuser:appuser /app && \
+    mkdir -p /home/appuser/.cache/uv && \
+    chown -R appuser:appuser /home/appuser/.cache
+
+# ConfiguraÃ§Ãµes para reduzir uso de memÃ³ria durante o build
+ENV UV_COMPILE_BYTECODE=0 \
+    UV_LINK_MODE=copy \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Adiciona UV ao PATH
+ENV PATH="/root/.local/bin:$PATH"
+
+WORKDIR /app
+
+# Copia arquivos de dependÃªncias primeiro (muda menos frequentemente)
+COPY pyproject.toml uv.lock ./
+
+# Instala dependÃªncias usando UV com otimizaÃ§Ãµes de memÃ³ria
+RUN uv sync --frozen --no-install-project --no-dev
+
+# Copia cÃ³digo da aplicaÃ§Ã£o por Ãºltimo (muda mais frequentemente)
+COPY src ./src
+
+EXPOSE 8080
+
+# Executar como root temporariamente para teste
+CMD ["/bin/bash", "-c", "cd /app && PYTHONPATH=/app uv run uvicorn src.main:app --host 0.0.0.0 --port 8080"]
