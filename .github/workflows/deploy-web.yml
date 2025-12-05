@@ -1,0 +1,140 @@
+name: Deploy Frontend
+
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "doctorq-web/**"
+      - ".github/workflows/deploy-web.yml"
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: "Branch ou tag que deve ser deployada (padrão: main)"
+        required: false
+        default: "main"
+
+
+permissions:
+  contents: read
+
+
+concurrency:
+  group: doctorq-web-production
+  cancel-in-progress: false
+
+
+env:
+  NODE_VERSION: "20"
+  NEXT_TELEMETRY_DISABLED: "1"
+  NEXT_DISABLE_ESLINT: "1"
+  TSC_COMPILE_ON_ERROR: "1"
+  NODE_OPTIONS: "--max-old-space-size=4096"
+
+
+jobs:
+  quality:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: doctorq-web
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: yarn
+          cache-dependency-path: doctorq-web/yarn.lock
+
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+
+      - name: Run lint
+        run: yarn lint
+
+
+      - name: Run unit tests
+        run: yarn test --runInBand --passWithNoTests
+
+
+      - name: Build production bundle
+        run: yarn build
+        env:
+          NODE_ENV: production
+
+
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: quality
+    if: ${{ github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' }}
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v0.1.10
+        env:
+          DEPLOY_REF: ${{ inputs.target_ref || github.ref_name }}
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -euo pipefail
+
+
+            export PATH="$HOME/.nvm/versions/node/v${{ env.NODE_VERSION }}/bin:$HOME/.local/bin:$PATH"
+
+
+            REMOTE_ROOT="/home/${{ secrets.EC2_USER }}/DoctorQ"
+            WEB_DIR="doctorq-web"
+
+
+            if [ ! -d "$REMOTE_ROOT" ]; then
+              mkdir -p "$REMOTE_ROOT"
+            fi
+
+
+            if [ ! -d "$REMOTE_ROOT/.git" ]; then
+              git clone https://github.com/${{ github.repository }} "$REMOTE_ROOT"
+            fi
+
+
+            cd "$REMOTE_ROOT"
+            git fetch origin --tags --prune
+            if git rev-parse --verify --quiet "origin/${DEPLOY_REF}"; then
+              git checkout -B "${DEPLOY_REF}" "origin/${DEPLOY_REF}"
+            else
+              git checkout "${DEPLOY_REF}"
+            fi
+
+
+            if [ ! -d "$WEB_DIR" ] && [ -d "estetiQ-web" ]; then
+              WEB_DIR="estetiQ-web"
+            fi
+
+
+            cd "$REMOTE_ROOT/$WEB_DIR"
+            yarn install --frozen-lockfile
+            NEXT_TELEMETRY_DISABLED=${{ env.NEXT_TELEMETRY_DISABLED }} \
+            NEXT_DISABLE_ESLINT=${{ env.NEXT_DISABLE_ESLINT }} \
+            TSC_COMPILE_ON_ERROR=${{ env.TSC_COMPILE_ON_ERROR }} \
+            NODE_OPTIONS='${{ env.NODE_OPTIONS }}' \
+            yarn build
+
+
+            if pm2 describe doctorq-web >/dev/null 2>&1; then
+              pm2 reload doctorq-web --update-env
+            else
+              pm2 start yarn --name doctorq-web --cwd "$REMOTE_ROOT/$WEB_DIR" -- start
+            fi
+
+
+            pm2 save
