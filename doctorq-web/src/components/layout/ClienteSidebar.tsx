@@ -21,7 +21,9 @@ import {
   Search,
 } from "lucide-react";
 import { useUserType } from "@/contexts/UserTypeContext";
+import { useTelasPermitidas } from "@/hooks/useTelasPermitidas";
 import type { UserType } from "@/types/auth";
+import { useMemo } from "react";
 
 interface MenuItem {
   label: string;
@@ -42,9 +44,32 @@ interface ClienteSidebarProps {
   onSignOut?: () => void;
 }
 
+// Definir menus FORA do componente para evitar re-criação a cada render
+const BASE_MENU_ITEMS: MenuItem[] = [
+  { label: "Dashboard", href: "/paciente/dashboard", icon: LayoutDashboard },
+  { label: "Busca Inteligente", href: "/paciente/busca-inteligente", icon: Search },
+  { label: "Procedimentos", href: "/paciente/procedimentos", icon: Sparkles },
+  { label: "Meus Agendamentos", href: "/paciente/agendamentos", icon: Calendar, badge: 2 },
+  { label: "Minhas Avaliações", href: "/paciente/avaliacoes", icon: Star },
+  { label: "Galeria de Fotos", href: "/paciente/fotos", icon: ImageIcon },
+  { label: "Favoritos", href: "/paciente/favoritos", icon: Heart },
+  { label: "Carrinho", href: "/marketplace/carrinho", icon: ShoppingCart },
+  { label: "Meus Pedidos", href: "/paciente/pedidos", icon: Package },
+  { label: "Financeiro", href: "/paciente/financeiro", icon: Wallet },
+  { label: "Atendimento Humano", href: "/paciente/atendimento", icon: MessageSquare, badge: 3 },
+  { label: "Pagamentos", href: "/paciente/pagamentos", icon: CreditCard },
+  { label: "Notificações", href: "/paciente/notificacoes", icon: Bell },
+];
+
+const BOTTOM_MENU_ITEMS: MenuItem[] = [
+  { label: "Meu Perfil", href: "/paciente/perfil", icon: User },
+  { label: "Configurações", href: "/paciente/configuracoes", icon: Settings },
+];
+
 export function ClienteSidebar({ fallbackUser, onSignOut }: ClienteSidebarProps = {}) {
   const pathname = usePathname();
   const { user, logout } = useUserType();
+  const { isTelaPermitida, telasPermitidas } = useTelasPermitidas();
   const resolvedUser = (user as SidebarUser | null) ?? fallbackUser ?? null;
   const handleLogout = () => {
     if (onSignOut) {
@@ -54,26 +79,16 @@ export function ClienteSidebar({ fallbackUser, onSignOut }: ClienteSidebarProps 
     }
   };
 
-  const menuItems: MenuItem[] = [
-    { label: "Dashboard", href: "/paciente/dashboard", icon: LayoutDashboard },
-    { label: "Busca Inteligente", href: "/paciente/busca-inteligente", icon: Search },
-    { label: "Procedimentos", href: "/paciente/procedimentos", icon: Sparkles },
-    { label: "Meus Agendamentos", href: "/paciente/agendamentos", icon: Calendar, badge: 2 },
-    { label: "Minhas Avaliações", href: "/paciente/avaliacoes", icon: Star },
-    { label: "Galeria de Fotos", href: "/paciente/fotos", icon: ImageIcon },
-    { label: "Favoritos", href: "/paciente/favoritos", icon: Heart },
-    { label: "Carrinho", href: "/marketplace/carrinho", icon: ShoppingCart },
-    { label: "Meus Pedidos", href: "/paciente/pedidos", icon: Package },
-    { label: "Financeiro", href: "/paciente/financeiro", icon: Wallet },
-    { label: "Atendimento Humano", href: "/paciente/atendimento", icon: MessageSquare, badge: 3 },
-    { label: "Pagamentos", href: "/paciente/pagamentos", icon: CreditCard },
-    { label: "Notificações", href: "/paciente/notificacoes", icon: Bell },
-  ];
+  // Filtrar itens de menu baseado nas permissões do plano
+  const menuItems = useMemo(() => {
+    if (telasPermitidas.length === 0) return BASE_MENU_ITEMS;
+    return BASE_MENU_ITEMS.filter((item) => isTelaPermitida(item.href));
+  }, [telasPermitidas, isTelaPermitida]);
 
-  const bottomMenuItems: MenuItem[] = [
-    { label: "Meu Perfil", href: "/paciente/perfil", icon: User },
-    { label: "Configurações", href: "/paciente/configuracoes", icon: Settings },
-  ];
+  const bottomMenuItems = useMemo(() => {
+    if (telasPermitidas.length === 0) return BOTTOM_MENU_ITEMS;
+    return BOTTOM_MENU_ITEMS.filter((item) => isTelaPermitida(item.href));
+  }, [telasPermitidas, isTelaPermitida]);
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 

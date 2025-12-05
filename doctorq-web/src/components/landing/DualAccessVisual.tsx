@@ -48,7 +48,7 @@ export function DualAccessVisual() {
                 Encontre o profissional ideal
               </h2>
               <p className="text-lg text-white/90 mb-8">
-                Busque, compare e agende com os melhores especialistas em estética perto de você
+                Busque, compare e agende com os melhores especialistas em saúde perto de você
               </p>
 
               {/* Features */}
@@ -142,7 +142,7 @@ export function DualAccessVisual() {
                 size="lg"
                 className="bg-white text-blue-600 hover:bg-gray-100 rounded-full px-8 group/btn"
               >
-                <Link href="/registro?tipo=profissional">
+                <Link href="/parceiros">
                   Cadastre-se Grátis
                   <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                 </Link>

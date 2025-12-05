@@ -17,7 +17,7 @@ from sqlalchemy import (
     ForeignKey,
     DECIMAL,
 )
-from sqlalchemy.dialects.postgresql import UUID, JSONB
+from sqlalchemy.dialects.postgresql import UUID, JSONB, ARRAY
 from sqlalchemy.dialects import postgresql
 
 from src.models.base import Base
@@ -35,7 +35,7 @@ class ProfissionalORM(Base):
     id_empresa = Column(UUID(as_uuid=True), ForeignKey("tb_empresas.id_empresa"))
     nm_profissional = Column(String(255), nullable=False)
     ds_biografia = Column(Text)
-    ds_especialidades = Column(Text, nullable=False, default="[]")  # JSON array for SQLite compatibility
+    ds_especialidades = Column(ARRAY(Text), nullable=False, default=[])  # PostgreSQL text array
     nr_registro_profissional = Column(String(50))
     ds_formacao = Column(Text)
     nr_anos_experiencia = Column(Integer)
@@ -46,7 +46,7 @@ class ProfissionalORM(Base):
     ds_horarios_atendimento = Column(JSONB)
     nr_tempo_consulta = Column(Integer, default=60)
     st_aceita_online = Column(Boolean, default=True)
-    ds_procedimentos_realizados = Column(Text, default="[]")  # JSON array for SQLite compatibility
+    ds_procedimentos_realizados = Column(ARRAY(Text), default=[])  # PostgreSQL text array
     fg_autonomo = Column(Boolean, default=False)
     st_ativo = Column(Boolean, default=True)
     st_verificado = Column(Boolean, default=False)

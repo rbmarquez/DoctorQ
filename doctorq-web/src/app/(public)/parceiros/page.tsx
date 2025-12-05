@@ -46,7 +46,7 @@ const partnerCategories: PartnerCategory[] = [
   {
     id: "clinicas",
     icon: Building2,
-    title: "Clínicas de Estética",
+    title: "Clínicas de Saúde",
     description: "Sistema completo para gestão de agenda, pacientes e procedimentos",
     image: "🏥",
     gradient: "from-blue-500 to-rose-500",
@@ -248,13 +248,13 @@ export default function ParceirosPage() {
             <div className="space-y-8 animate-in fade-in slide-in-from-left duration-700">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 text-sm font-medium">
                 <Sparkles className="h-4 w-4" />
-                Plataforma #1 para Estética no Brasil
+                Plataforma #1 para Saúde no Brasil
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 Transforme seu
                 <span className="block bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                  Negócio de Estética
+                  Negócio de Saúde
                 </span>
               </h1>
 
@@ -594,7 +594,7 @@ export default function ParceirosPage() {
                 <span className="text-xl font-bold text-white">{appName}</span>
               </div>
               <p className="text-sm">
-                A plataforma mais completa para gestão de estética no Brasil.
+                A plataforma mais completa para gestão de saúde no Brasil.
               </p>
             </div>
 

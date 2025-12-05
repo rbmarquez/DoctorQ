@@ -11,6 +11,7 @@ import { UserTypeProvider } from "@/contexts/UserTypeContext";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { SessionProvider } from "next-auth/react";
 import { AuthTokenSync } from "@/components/AuthTokenSync";
+import { TelasPermitidasProvider } from "@/hooks/useTelasPermitidas";
 import { ReactNode } from "react";
 
 interface ProvidersProps {
@@ -42,13 +43,15 @@ function FeatureProviders({ children }: ProvidersProps) {
   return (
     <AuthProvider>
       <UserTypeProvider>
-        <AgentProvider>
-          <MarketplaceProvider>
-            <BookingProvider>
-              <ChatInitialProvider>{children}</ChatInitialProvider>
-            </BookingProvider>
-          </MarketplaceProvider>
-        </AgentProvider>
+        <TelasPermitidasProvider>
+          <AgentProvider>
+            <MarketplaceProvider>
+              <BookingProvider>
+                <ChatInitialProvider>{children}</ChatInitialProvider>
+              </BookingProvider>
+            </MarketplaceProvider>
+          </AgentProvider>
+        </TelasPermitidasProvider>
       </UserTypeProvider>
     </AuthProvider>
   );

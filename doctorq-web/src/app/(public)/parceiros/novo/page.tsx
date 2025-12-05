@@ -175,7 +175,7 @@ const FALLBACK_SERVICES: PartnerServiceDefinition[] = [
     price_value: 39,
     price_label: "R$ 39/mês por usuário",
     features: [
-      "Cursos certificados sobre marketing, vendas e gestão estética",
+      "Cursos certificados sobre marketing, vendas e gestão em saúde",
       "Atualizações mensais com tendências de mercado",
       "Mentorias em grupo com especialistas DoctorQ",
     ],
@@ -995,7 +995,7 @@ export default function NovoParceirosPage() {
                       onChange={(event) =>
                         setFormData((prev) => ({ ...prev, businessName: event.target.value }))
                       }
-                      placeholder="Clínica Estética Exemplo"
+                      placeholder="Clínica de Saúde Exemplo"
                     />
                   </div>
                   <div className="space-y-2">
@@ -1368,7 +1368,7 @@ export default function NovoParceirosPage() {
             <section>
               <h3 className="font-bold text-lg mb-2">2. Descrição dos Serviços</h3>
               <p>
-                A DoctorQ oferece uma plataforma SaaS para gestão de clínicas de estética, incluindo agendamento online,
+                A DoctorQ oferece uma plataforma SaaS para gestão de clínicas de saúde, incluindo agendamento online,
                 gestão de pacientes, marketplace de produtos, relatórios financeiros e ferramentas de inteligência artificial
                 para otimização do atendimento.
               </p>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useMemo } from "react";
 import {
   LayoutDashboard,
   CalendarCheck,
@@ -18,6 +19,7 @@ import {
   ShoppingBag,
 } from "lucide-react";
 import { useUserType } from "@/contexts/UserTypeContext";
+import { useTelasPermitidas } from "@/hooks/useTelasPermitidas";
 import type { UserType } from "@/types/auth";
 
 interface MenuItem {
@@ -39,9 +41,29 @@ interface ProfissionalSidebarProps {
   onSignOut?: () => void;
 }
 
+// Definir menus FORA do componente para evitar re-criação a cada render
+const BASE_MENU_ITEMS: MenuItem[] = [
+  { label: "Dashboard", href: "/profissional/dashboard", icon: LayoutDashboard },
+  { label: "Agenda", href: "/profissional/agenda", icon: CalendarCheck, badge: 5 },
+  { label: "Pacientes", href: "/profissional/pacientes", icon: Users },
+  { label: "Procedimentos", href: "/profissional/procedimentos", icon: Sparkles },
+  { label: "Prontuários", href: "/profissional/prontuarios", icon: ClipboardCheck },
+  { label: "Relatórios", href: "/profissional/relatorios", icon: BarChart3 },
+  { label: "Financeiro", href: "/profissional/financeiro", icon: Wallet },
+  { label: "Atendimento Humano", href: "/profissional/atendimento", icon: MessageCircle, badge: 4 },
+  { label: "Notificações", href: "/profissional/notificacoes", icon: Bell },
+  { label: "Loja DoctorQ", href: "/marketplace/produtos", icon: ShoppingBag },
+];
+
+const BOTTOM_MENU_ITEMS: MenuItem[] = [
+  { label: "Perfil Profissional", href: "/profissional/perfil", icon: FileText },
+  { label: "Configurações", href: "/profissional/configuracoes", icon: Settings },
+];
+
 export function ProfissionalSidebar({ fallbackUser, onSignOut }: ProfissionalSidebarProps = {}) {
   const pathname = usePathname();
   const { user, logout } = useUserType();
+  const { isTelaPermitida, telasPermitidas, isLoading: isLoadingTelas } = useTelasPermitidas();
   const resolvedUser = (user as SidebarUser | null) ?? fallbackUser ?? null;
   const handleLogout = () => {
     if (onSignOut) {
@@ -51,23 +73,24 @@ export function ProfissionalSidebar({ fallbackUser, onSignOut }: ProfissionalSid
     }
   };
 
-  const menuItems: MenuItem[] = [
-    { label: "Dashboard", href: "/profissional/dashboard", icon: LayoutDashboard },
-    { label: "Agenda", href: "/profissional/agenda", icon: CalendarCheck, badge: 5 },
-    { label: "Pacientes", href: "/profissional/pacientes", icon: Users },
-    { label: "Procedimentos", href: "/profissional/procedimentos", icon: Sparkles },
-    { label: "Prontuários", href: "/profissional/prontuarios", icon: ClipboardCheck },
-    { label: "Relatórios", href: "/profissional/relatorios", icon: BarChart3 },
-    { label: "Financeiro", href: "/profissional/financeiro", icon: Wallet },
-    { label: "Atendimento Humano", href: "/profissional/atendimento", icon: MessageCircle, badge: 4 },
-    { label: "Notificações", href: "/profissional/notificacoes", icon: Bell },
-    { label: "Loja DoctorQ", href: "/marketplace/produtos", icon: ShoppingBag },
-  ];
+  // Filtrar itens de menu baseado nas permissões do plano
+  const menuItems = useMemo(() => {
+    // Se não há restrições (lista vazia), mostra todos os itens
+    if (telasPermitidas.length === 0) {
+      return BASE_MENU_ITEMS;
+    }
+    // Filtra apenas os itens permitidos
+    return BASE_MENU_ITEMS.filter((item) => isTelaPermitida(item.href));
+  }, [telasPermitidas, isTelaPermitida]);
 
-  const bottomMenuItems: MenuItem[] = [
-    { label: "Perfil Profissional", href: "/profissional/perfil", icon: FileText },
-    { label: "Configurações", href: "/profissional/configuracoes", icon: Settings },
-  ];
+  const bottomMenuItems = useMemo(() => {
+    // Se não há restrições (lista vazia), mostra todos os itens
+    if (telasPermitidas.length === 0) {
+      return BOTTOM_MENU_ITEMS;
+    }
+    // Filtra apenas os itens permitidos
+    return BOTTOM_MENU_ITEMS.filter((item) => isTelaPermitida(item.href));
+  }, [telasPermitidas, isTelaPermitida]);
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 

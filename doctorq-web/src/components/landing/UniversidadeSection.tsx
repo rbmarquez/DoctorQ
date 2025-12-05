@@ -115,7 +115,7 @@ export function UniversidadeSection() {
 
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Aprenda com os maiores especialistas do mercado. Cursos, ebooks e podcast
-            exclusivos para elevar sua carreira na estética.
+            exclusivos para elevar sua carreira na saúde.
           </p>
         </div>
 
@@ -300,7 +300,7 @@ export function UniversidadeSection() {
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-gray-900">Podcast DoctorQ</h3>
-                <p className="text-gray-600">Conversas com os maiores nomes da estética</p>
+                <p className="text-gray-600">Conversas com os maiores nomes da saúde</p>
               </div>
             </div>
 

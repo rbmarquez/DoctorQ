@@ -49,7 +49,7 @@ const testimonials = [
   {
     name: "Patricia Lima",
     role: "Gestora de Clínica",
-    content: "Nossa clínica aumentou em 40% o número de agendamentos após nos cadastrarmos. Ferramenta essencial para qualquer clínica de estética!",
+    content: "Nossa clínica aumentou em 40% o número de agendamentos após nos cadastrarmos. Ferramenta essencial para qualquer clínica de saúde!",
     rating: 5,
     initials: "PL",
     color: "bg-blue-600",

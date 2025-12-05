@@ -21,7 +21,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-gray-400 text-sm">
-              Conectando você aos melhores profissionais de estética do Brasil.
+              Conectando você aos melhores profissionais de saúde do Brasil.
             </p>
             {/* Social Media */}
             <div className="flex space-x-4">

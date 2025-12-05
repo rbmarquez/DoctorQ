@@ -56,7 +56,7 @@ export function CareersPreview() {
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <Image
                 src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=60"
-                alt="Profissionais de estética"
+                alt="Profissionais de saúde"
                 width={600}
                 height={500}
                 loading="lazy"

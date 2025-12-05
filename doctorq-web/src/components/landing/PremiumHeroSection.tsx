@@ -37,7 +37,7 @@ export function PremiumHeroSection() {
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-rose-200 shadow-lg">
               <Sparkles className="w-4 h-4 text-rose-500" />
               <span className="text-sm font-medium text-gray-700">
-                O futuro da estética é inteligente
+                O futuro da saúde é inteligente
               </span>
             </div>
 
@@ -59,7 +59,7 @@ export function PremiumHeroSection() {
 
               <p className="text-xl text-gray-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
                 A plataforma mais completa para conectar você aos melhores profissionais
-                de estética. Agendamento inteligente, IA personalizada e resultado garantido.
+                de saúde. Agendamento inteligente, IA personalizada e resultado garantido.
               </p>
             </div>
 
@@ -128,7 +128,7 @@ export function PremiumHeroSection() {
                         Descubra o DoctorQ
                       </p>
                       <p className="text-white/90 text-sm">
-                        Veja como nossa plataforma revoluciona o mercado de estética
+                        Veja como nossa plataforma revoluciona o mercado de saúde
                       </p>
                     </div>
                   </div>

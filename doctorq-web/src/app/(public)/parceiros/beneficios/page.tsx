@@ -129,7 +129,7 @@ export default function BeneficiosPage() {
             Benefícios para Parceiros
           </h1>
           <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            Descubra todas as vantagens de fazer parte da maior rede de estética e beleza do Brasil
+            Descubra todas as vantagens de fazer parte da maior rede de saúde do Brasil
           </p>
         </div>
 

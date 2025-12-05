@@ -152,7 +152,7 @@ export default function CadastroParceirosPage() {
                       <SelectValue placeholder="Selecione" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="estetica">Estética</SelectItem>
+                      <SelectItem value="saude">Saúde</SelectItem>
                       <SelectItem value="clinica">Clínica Médica</SelectItem>
                       <SelectItem value="farmaceutica">Farmacêutica</SelectItem>
                       <SelectItem value="cosmetica">Cosmética</SelectItem>

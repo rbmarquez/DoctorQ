@@ -17,7 +17,9 @@ import {
   Users,
 } from "lucide-react";
 import { useUserType } from "@/contexts/UserTypeContext";
+import { useTelasPermitidas } from "@/hooks/useTelasPermitidas";
 import type { UserType } from "@/types/auth";
+import { useMemo } from "react";
 
 interface MenuItem {
   label: string;
@@ -38,9 +40,28 @@ interface FornecedorSidebarProps {
   onSignOut?: () => void;
 }
 
+// Definir menus FORA do componente para evitar re-criação a cada render
+const BASE_MENU_ITEMS: MenuItem[] = [
+  { label: "Dashboard", href: "/fornecedor/dashboard", icon: LayoutDashboard },
+  { label: "Catálogo de Produtos", href: "/fornecedor/produtos", icon: PackageSearch },
+  { label: "Pedidos", href: "/fornecedor/pedidos", icon: ClipboardList, badge: 4 },
+  { label: "Logística", href: "/fornecedor/logistica", icon: Truck },
+  { label: "Financeiro", href: "/fornecedor/financeiro", icon: Wallet },
+  { label: "Relatórios", href: "/fornecedor/relatorios", icon: BarChart3 },
+  { label: "Atendimento Humano", href: "/fornecedor/atendimento", icon: MessageCircle, badge: 2 },
+  { label: "Notificações", href: "/fornecedor/notificacoes", icon: Bell },
+  { label: "Clientes", href: "/fornecedor/clientes", icon: Users },
+  { label: "Marketplace", href: "/marketplace/produtos", icon: ShoppingCart },
+];
+
+const BOTTOM_MENU_ITEMS: MenuItem[] = [
+  { label: "Perfil da Empresa", href: "/fornecedor/perfil", icon: Settings },
+];
+
 export function FornecedorSidebar({ fallbackUser, onSignOut }: FornecedorSidebarProps = {}) {
   const pathname = usePathname();
   const { user, logout } = useUserType();
+  const { isTelaPermitida, telasPermitidas } = useTelasPermitidas();
   const resolvedUser = (user as SidebarUser | null) ?? fallbackUser ?? null;
   const handleLogout = () => {
     if (onSignOut) {
@@ -50,22 +71,16 @@ export function FornecedorSidebar({ fallbackUser, onSignOut }: FornecedorSidebar
     }
   };
 
-  const menuItems: MenuItem[] = [
-    { label: "Dashboard", href: "/fornecedor/dashboard", icon: LayoutDashboard },
-    { label: "Catálogo de Produtos", href: "/fornecedor/produtos", icon: PackageSearch },
-    { label: "Pedidos", href: "/fornecedor/pedidos", icon: ClipboardList, badge: 4 },
-    { label: "Logística", href: "/fornecedor/logistica", icon: Truck },
-    { label: "Financeiro", href: "/fornecedor/financeiro", icon: Wallet },
-    { label: "Relatórios", href: "/fornecedor/relatorios", icon: BarChart3 },
-    { label: "Atendimento Humano", href: "/fornecedor/atendimento", icon: MessageCircle, badge: 2 },
-    { label: "Notificações", href: "/fornecedor/notificacoes", icon: Bell },
-    { label: "Clientes", href: "/fornecedor/clientes", icon: Users },
-    { label: "Marketplace", href: "/marketplace/produtos", icon: ShoppingCart },
-  ];
+  // Filtrar itens de menu baseado nas permissões do plano
+  const menuItems = useMemo(() => {
+    if (telasPermitidas.length === 0) return BASE_MENU_ITEMS;
+    return BASE_MENU_ITEMS.filter((item) => isTelaPermitida(item.href));
+  }, [telasPermitidas, isTelaPermitida]);
 
-  const bottomMenuItems: MenuItem[] = [
-    { label: "Perfil da Empresa", href: "/fornecedor/perfil", icon: Settings },
-  ];
+  const bottomMenuItems = useMemo(() => {
+    if (telasPermitidas.length === 0) return BOTTOM_MENU_ITEMS;
+    return BOTTOM_MENU_ITEMS.filter((item) => isTelaPermitida(item.href));
+  }, [telasPermitidas, isTelaPermitida]);
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 

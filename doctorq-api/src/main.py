@@ -76,6 +76,7 @@ from src.routes.partner_upgrade import router as partner_upgrade_router
 from src.routes.pagamentos_route import router as pagamentos_router
 from src.routes.permissions import router as permissions_router
 from src.routes.telas_config import router as telas_config_router
+from src.routes.plano_telas_route import router as plano_telas_router
 from src.routes.anamnese import router as anamnese_router
 from src.routes.lembrete import router as lembrete_router
 from src.routes.paciente import router as paciente_router
@@ -363,6 +364,7 @@ app.include_router(partner_router)
 app.include_router(partner_upgrade_router)
 app.include_router(permissions_router)
 app.include_router(telas_config_router)
+app.include_router(plano_telas_router)
 app.include_router(anamnese_router)
 app.include_router(lembrete_router)
 app.include_router(paciente_router)

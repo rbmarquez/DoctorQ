@@ -26,7 +26,7 @@ export function DualAccessSection() {
             Escolha Sua Jornada
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Uma plataforma completa para pacientes e profissionais da estética
+            Uma plataforma completa para pacientes e profissionais da saúde
           </p>
         </div>
 
@@ -46,7 +46,7 @@ export function DualAccessSection() {
             {/* Video overlay info */}
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
               <h3 className="text-white text-xl font-bold mb-1">Veja como funciona</h3>
-              <p className="text-white/80 text-sm">Descubra a plataforma que está revolucionando a estética</p>
+              <p className="text-white/80 text-sm">Descubra a plataforma que está revolucionando a saúde</p>
             </div>
           </div>
 

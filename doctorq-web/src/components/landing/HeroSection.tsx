@@ -404,7 +404,7 @@ export function HeroSection() {
               {tagline}
             </p>
             <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-              Encontre os melhores profissionais e clínicas de estética perto de você.
+              Encontre os melhores profissionais e clínicas de saúde perto de você.
               Agende consultas com facilidade e cuide da sua beleza com quem entende.
             </p>
           </div>

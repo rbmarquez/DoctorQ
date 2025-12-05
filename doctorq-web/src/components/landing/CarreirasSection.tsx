@@ -126,7 +126,7 @@ export function CarreirasSection() {
           </h2>
 
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Conectamos profissionais talentosos com as melhores clínicas de estética do Brasil.
+            Conectamos profissionais talentosos com as melhores clínicas de saúde do Brasil.
             Encontre sua próxima oportunidade ou cadastre vagas da sua empresa.
           </p>
         </div>
@@ -163,7 +163,7 @@ export function CarreirasSection() {
                 </h3>
 
                 <p className="text-gray-600 mb-6">
-                  Encontre oportunidades nas melhores clínicas de estética. Filtros inteligentes
+                  Encontre oportunidades nas melhores clínicas de saúde. Filtros inteligentes
                   por localização, salário e tipo de vaga.
                 </p>
 
@@ -348,10 +348,10 @@ export function CarreirasSection() {
         <div className="bg-gradient-to-br from-gray-900 to-indigo-900 rounded-3xl p-12 shadow-2xl">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-white mb-4">
-              Por Que Trabalhar em Estética?
+              Por Que Trabalhar em Saúde?
             </h3>
             <p className="text-white/80 text-lg max-w-2xl mx-auto">
-              O mercado de estética é um dos que mais cresce no Brasil. Faça parte dessa transformação.
+              O mercado de saúde é um dos que mais cresce no Brasil. Faça parte dessa transformação.
             </p>
           </div>
 

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { ClinicaSidebar } from "@/components/clinica/ClinicaSidebar";
 import { useAuth } from "@/hooks/useAuth";
+import { RouteGuard } from "@/components/guards";
 
 export default function ClinicaLayout({
   children,
@@ -62,13 +63,15 @@ export default function ClinicaLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
-      <div className="flex h-screen overflow-hidden">
-        <ClinicaSidebar />
-        <main className="flex-1 overflow-y-auto bg-background">
-          {children}
-        </main>
+    <RouteGuard fallbackUrl="/clinica/dashboard">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+        <div className="flex h-screen overflow-hidden">
+          <ClinicaSidebar />
+          <main className="flex-1 overflow-y-auto bg-background">
+            {children}
+          </main>
+        </div>
       </div>
-    </div>
+    </RouteGuard>
   );
 }

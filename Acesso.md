@@ -1,6 +1,16 @@
 admin@estetiq.app
 Admin123
 
+E-mail: 
+t@t.com
+Senha temporária: 
+C2EQEYRACJQS
+
+E-mail
+r@r.com
+Senha temporária
+J6SGN8DX7TRS
+
 Cliente
 rodrigo.marque@transportes.gov.br
 GxbMA2vfvHKy

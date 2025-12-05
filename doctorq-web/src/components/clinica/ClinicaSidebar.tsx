@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -21,7 +22,7 @@ import {
 import { useAuth } from "@/hooks/useAuth";
 import { signOut } from "next-auth/react";
 import { useAgendamentos } from "@/lib/api/hooks/useAgendamentos";
-import { useMemo } from "react";
+import { useTelasPermitidas } from "@/hooks/useTelasPermitidas";
 
 interface MenuItem {
   label: string;
@@ -30,9 +31,72 @@ interface MenuItem {
   badge?: number;
 }
 
+// Definir menus FORA do componente para evitar re-criação a cada render
+const BASE_MENU_ITEMS: Omit<MenuItem, 'badge'>[] = [
+  {
+    label: "Dashboard",
+    href: "/clinica/dashboard",
+    icon: LayoutDashboard,
+  },
+  {
+    label: "Agendamentos",
+    href: "/clinica/agendamentos",
+    icon: Calendar,
+  },
+  {
+    label: "Equipe",
+    href: "/clinica/equipe",
+    icon: Users,
+  },
+  {
+    label: "Perfis e Permissões",
+    href: "/clinica/perfis",
+    icon: Shield,
+  },
+  {
+    label: "Profissionais",
+    href: "/clinica/profissionais",
+    icon: UserPlus,
+  },
+  {
+    label: "Procedimentos",
+    href: "/clinica/procedimentos",
+    icon: Briefcase,
+  },
+  {
+    label: "Vagas de Emprego",
+    href: "/clinica/vagas",
+    icon: UserSearch,
+  },
+  {
+    label: "Atendimento Humano",
+    href: "/clinica/atendimento",
+    icon: MessageSquare,
+  },
+  {
+    label: "Financeiro",
+    href: "/clinica/financeiro",
+    icon: DollarSign,
+  },
+  {
+    label: "Relatórios",
+    href: "/clinica/relatorios",
+    icon: TrendingUp,
+  },
+];
+
+const BOTTOM_MENU_ITEMS: MenuItem[] = [
+  {
+    label: "Configurações",
+    href: "/clinica/configuracoes",
+    icon: Settings,
+  },
+];
+
 export function ClinicaSidebar() {
   const pathname = usePathname();
   const { user } = useAuth();
+  const { isTelaPermitida, telasPermitidas } = useTelasPermitidas();
 
   // Buscar agendamentos de hoje para badges
   const hoje = new Date().toISOString().split('T')[0];
@@ -54,67 +118,24 @@ export function ClinicaSidebar() {
     };
   }, [agendamentosHoje]);
 
-  const menuItems: MenuItem[] = [
-    {
-      label: "Dashboard",
-      href: "/clinica/dashboard",
-      icon: LayoutDashboard,
-    },
-    {
-      label: "Agendamentos",
-      href: "/clinica/agendamentos",
-      icon: Calendar,
-      badge: stats.agendamentos,
-    },
-    {
-      label: "Equipe",
-      href: "/clinica/equipe",
-      icon: Users,
-    },
-    {
-      label: "Perfis e Permissões",
-      href: "/clinica/perfis",
-      icon: Shield,
-    },
-    {
-      label: "Profissionais",
-      href: "/clinica/profissionais",
-      icon: UserPlus,
-    },
-    {
-      label: "Procedimentos",
-      href: "/clinica/procedimentos",
-      icon: Briefcase,
-    },
-    {
-      label: "Vagas de Emprego",
-      href: "/clinica/vagas",
-      icon: UserSearch,
-    },
-    {
-      label: "Atendimento Humano",
-      href: "/clinica/atendimento",
-      icon: MessageSquare,
-    },
-    {
-      label: "Financeiro",
-      href: "/clinica/financeiro",
-      icon: DollarSign,
-    },
-    {
-      label: "Relatórios",
-      href: "/clinica/relatorios",
-      icon: TrendingUp,
-    },
-  ];
+  // Filtrar itens de menu baseado nas permissões do plano
+  // E adicionar badges dinamicamente
+  const menuItems = useMemo(() => {
+    // Adicionar badges aos itens base
+    const itemsComBadges: MenuItem[] = BASE_MENU_ITEMS.map((item) => ({
+      ...item,
+      badge: item.href === "/clinica/agendamentos" ? stats.agendamentos : undefined,
+    }));
 
-  const bottomMenuItems: MenuItem[] = [
-    {
-      label: "Configurações",
-      href: "/clinica/configuracoes",
-      icon: Settings,
-    },
-  ];
+    // Se não há restrições (lista vazia), mostra todos os itens
+    if (telasPermitidas.length === 0) return itemsComBadges;
+    return itemsComBadges.filter((item) => isTelaPermitida(item.href));
+  }, [telasPermitidas, isTelaPermitida, stats.agendamentos]);
+
+  const bottomMenuItems = useMemo(() => {
+    if (telasPermitidas.length === 0) return BOTTOM_MENU_ITEMS;
+    return BOTTOM_MENU_ITEMS.filter((item) => isTelaPermitida(item.href));
+  }, [telasPermitidas, isTelaPermitida]);
 
   const isActive = (href: string) => {
     return pathname === href || pathname?.startsWith(href + "/");

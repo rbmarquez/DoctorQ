@@ -405,7 +405,7 @@ export function ModernHeroSection() {
                   </span>
                 </h1>
                 <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
-                  Conecte-se com os melhores profissionais de estética.
+                  Conecte-se com os melhores profissionais de saúde.
                   Encontre, agende e transforme-se.
                 </p>
               </div>

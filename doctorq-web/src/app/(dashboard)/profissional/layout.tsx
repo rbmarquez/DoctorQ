@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import { RouteGuard } from "@/components/guards";
 
 export default function ProfissionalLayout({
   children,
@@ -46,5 +47,9 @@ export default function ProfissionalLayout({
     }
   };
 
-  return <>{children}</>;
+  return (
+    <RouteGuard fallbackUrl="/profissional/dashboard">
+      {children}
+    </RouteGuard>
+  );
 }

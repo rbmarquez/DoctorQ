@@ -235,7 +235,7 @@ export function PremiumNav() {
 
                   {/* Botão Cadastrar Empresa - Destaque Medical */}
                   <Link
-                    href="/registro-empresa"
+                    href="/parceiros"
                     className={`group relative flex items-center gap-2 text-sm font-bold px-6 py-3 rounded-xl overflow-hidden transition-all duration-300 ${
                       isScrolled
                         ? "bg-gradient-to-r from-blue-600 via-blue-700 to-cyan-600 text-white shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/35 hover:-translate-y-0.5"
